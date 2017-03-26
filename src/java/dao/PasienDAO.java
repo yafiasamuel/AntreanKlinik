@@ -5,7 +5,9 @@
  */
 package dao;
 
+import java.util.List;
 import javax.ejb.Stateless;
+import model.Pasien;
 
 /**
  *
@@ -14,6 +16,29 @@ import javax.ejb.Stateless;
 @Stateless
 public class PasienDAO implements PasienDAOLocal {
 
-  // Add business logic below. (Right-click in editor and choose
-  // "Insert Code > Add Business Method")
+  @Override
+  public void addPasien(Pasien pasien) {
+  }
+
+  @Override
+  public void editPasien(Pasien pasien) {
+  }
+
+  @Override
+  public void deletePasien(int id_pasien) {
+  }
+
+  @Override
+  public Pasien getPasien(int id_pasien) {
+    return null;
+  }
+
+  @Override
+  public List <Pasien> getAllPasien() {
+    return null;
+  }
+  
+
+  
+  
 }
