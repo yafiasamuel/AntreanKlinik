@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
   @NamedQuery(name = "Pasien.findAll", query = "SELECT p FROM Pasien p")
   , @NamedQuery(name = "Pasien.findByIdPasien", query = "SELECT p FROM Pasien p WHERE p.idPasien = :idPasien")
+  , @NamedQuery(name = "Pasien.findByNama", query = "SELECT p FROM Pasien p WHERE p.nama = :nama")
   , @NamedQuery(name = "Pasien.findByUsername", query = "SELECT p FROM Pasien p WHERE p.username = :username")
   , @NamedQuery(name = "Pasien.findByPassword", query = "SELECT p FROM Pasien p WHERE p.password = :password")
   , @NamedQuery(name = "Pasien.findByTempatLahir", query = "SELECT p FROM Pasien p WHERE p.tempatLahir = :tempatLahir")
@@ -40,7 +41,6 @@ import javax.xml.bind.annotation.XmlRootElement;
   , @NamedQuery(name = "Pasien.findByAlamat", query = "SELECT p FROM Pasien p WHERE p.alamat = :alamat")
   , @NamedQuery(name = "Pasien.findByFoto", query = "SELECT p FROM Pasien p WHERE p.foto = :foto")
   , @NamedQuery(name = "Pasien.getAll",query="SELECT e FROM Pasien e")})
-
 public class Pasien implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -49,6 +49,11 @@ public class Pasien implements Serializable {
   @Basic(optional = false)
   @Column(name = "id_pasien")
   private Integer idPasien;
+  @Basic(optional = false)
+  @NotNull
+  @Size(min = 1, max = 100)
+  @Column(name = "nama")
+  private String nama;
   @Basic(optional = false)
   @NotNull
   @Size(min = 1, max = 100)
@@ -103,8 +108,9 @@ public class Pasien implements Serializable {
     this.idPasien = idPasien;
   }
 
-  public Pasien(Integer idPasien, String username, String password, String tempatLahir, String tanggalLahir, String jenisKelamin, String pekerjaan, String nomorTelepon, String alamat) {
+  public Pasien(Integer idPasien, String nama, String username, String password, String tempatLahir, String tanggalLahir, String jenisKelamin, String pekerjaan, String nomorTelepon, String alamat) {
     this.idPasien = idPasien;
+    this.nama = nama;
     this.username = username;
     this.password = password;
     this.tempatLahir = tempatLahir;
@@ -121,6 +127,14 @@ public class Pasien implements Serializable {
 
   public void setIdPasien(Integer idPasien) {
     this.idPasien = idPasien;
+  }
+
+  public String getNama() {
+    return nama;
+  }
+
+  public void setNama(String nama) {
+    this.nama = nama;
   }
 
   public String getUsername() {
