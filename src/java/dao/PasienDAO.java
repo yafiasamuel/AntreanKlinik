@@ -5,7 +5,11 @@
  */
 package dao;
 
+import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import model.Pasien;
 
 /**
  *
@@ -13,7 +17,35 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class PasienDAO implements PasienDAOLocal {
+  @PersistenceContext
+  private EntityManager em;
+  
+  @Override
+  public void addPasien(Pasien pasien) {
+    em.persist(pasien);
+  }
 
-  // Add business logic below. (Right-click in editor and choose
-  // "Insert Code > Add Business Method")
+  @Override
+  public void editPasien(Pasien pasien) {
+    em.merge(pasien);
+  }
+
+  @Override
+  public void deletePasien(int id_pasien) {
+    em.remove(getPasien(id_pasien));
+  }
+
+  @Override
+  public Pasien getPasien(int id_pasien) {
+    return em.find(Pasien.class, id_pasien);
+  }
+
+  @Override
+  public List <Pasien> getAllPasien() {
+    return em.createNamedQuery("Pasien.getAll").getResultList();
+  }
+  
+
+  
+  
 }

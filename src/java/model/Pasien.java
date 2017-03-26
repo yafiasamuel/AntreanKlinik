@@ -38,7 +38,9 @@ import javax.xml.bind.annotation.XmlRootElement;
   , @NamedQuery(name = "Pasien.findByPekerjaan", query = "SELECT p FROM Pasien p WHERE p.pekerjaan = :pekerjaan")
   , @NamedQuery(name = "Pasien.findByNomorTelepon", query = "SELECT p FROM Pasien p WHERE p.nomorTelepon = :nomorTelepon")
   , @NamedQuery(name = "Pasien.findByAlamat", query = "SELECT p FROM Pasien p WHERE p.alamat = :alamat")
-  , @NamedQuery(name = "Pasien.findByFoto", query = "SELECT p FROM Pasien p WHERE p.foto = :foto")})
+  , @NamedQuery(name = "Pasien.findByFoto", query = "SELECT p FROM Pasien p WHERE p.foto = :foto")
+  , @NamedQuery(name = "Pasien.getAll",query="SELECT e FROM Pasien e")})
+
 public class Pasien implements Serializable {
 
   private static final long serialVersionUID = 1L;

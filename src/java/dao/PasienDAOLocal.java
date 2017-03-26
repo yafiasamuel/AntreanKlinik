@@ -5,7 +5,9 @@
  */
 package dao;
 
+import java.util.List;
 import javax.ejb.Local;
+import model.Pasien;
 
 /**
  *
@@ -13,5 +15,15 @@ import javax.ejb.Local;
  */
 @Local
 public interface PasienDAOLocal {
+
+  void addPasien(Pasien pasien);
+
+  void editPasien(Pasien pasien);
+
+  void deletePasien(int id_pasien);
+
+  Pasien getPasien(int id_pasien);
+
+  List <Pasien> getAllPasien();
   
 }
