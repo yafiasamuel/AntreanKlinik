@@ -108,7 +108,7 @@ public class Pasien implements Serializable {
     this.idPasien = idPasien;
   }
 
-  public Pasien(Integer idPasien, String nama, String username, String password, String tempatLahir, String tanggalLahir, String jenisKelamin, String pekerjaan, String nomorTelepon, String alamat) {
+  public Pasien(Integer idPasien, String nama, String username, String password, String tempatLahir, String tanggalLahir, String jenisKelamin, String status,String pekerjaan, String nomorTelepon, String alamat, String foto) {
     this.idPasien = idPasien;
     this.nama = nama;
     this.username = username;
@@ -116,9 +116,11 @@ public class Pasien implements Serializable {
     this.tempatLahir = tempatLahir;
     this.tanggalLahir = tanggalLahir;
     this.jenisKelamin = jenisKelamin;
+    this.status = status;
     this.pekerjaan = pekerjaan;
     this.nomorTelepon = nomorTelepon;
     this.alamat = alamat;
+    this.foto = foto;
   }
 
   public Integer getIdPasien() {
