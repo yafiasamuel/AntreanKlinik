@@ -42,7 +42,7 @@ public class PasienDAO implements PasienDAOLocal {
 
   @Override
   public List <Pasien> getAllPasien() {
-    return null;
+    return em.createNamedQuery("Pasien.getAll").getResultList();
   }
   
 
