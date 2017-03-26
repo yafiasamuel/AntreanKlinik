@@ -7,6 +7,8 @@ package dao;
 
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import model.Pasien;
 
 /**
@@ -15,22 +17,27 @@ import model.Pasien;
  */
 @Stateless
 public class PasienDAO implements PasienDAOLocal {
-
+  @PersistenceContext
+  private EntityManager em;
+  
   @Override
   public void addPasien(Pasien pasien) {
+    em.persist(pasien);
   }
 
   @Override
   public void editPasien(Pasien pasien) {
+    em.merge(pasien);
   }
 
   @Override
   public void deletePasien(int id_pasien) {
+    em.remove(getPasien(id_pasien));
   }
 
   @Override
   public Pasien getPasien(int id_pasien) {
-    return null;
+    return em.find(Pasien.class, id_pasien);
   }
 
   @Override
