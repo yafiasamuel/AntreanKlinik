@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Pasien;
 import service.PasienFacade;
 
+
 /**
  *
  * @author Dytra
@@ -31,11 +32,26 @@ public class RegistrasiPasien extends HttpServlet {
    * @throws ServletException if a servlet-specific error occurs
    * @throws IOException if an I/O error occurs
    */
+
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
     try (PrintWriter out = response.getWriter()) {
       /* TODO output your page here. You may use following sample code. */
+      
+    String nama = request.getParameter("nama");
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
+    String tempatLahir = request.getParameter("tempat_lahir");
+    String tanggalLahir = request.getParameter("tanggal_lahir");
+    String jenisKelamin = request.getParameter("jenisKelamin");
+    String status = request.getParameter("status");
+    String pekerjaan = request.getParameter("pekerjaan");
+    String nomorTelepon = request.getParameter("nomorTelp");
+    String alamat = request.getParameter("alamat");
+    String foto = request.getParameter("foto");
+    Pasien pasien = new Pasien(username, nama, password, tempatLahir, tanggalLahir, jenisKelamin, status, pekerjaan, nomorTelepon, alamat, foto);
+    pf.create(pasien);
       out.println("<!DOCTYPE html>");
       out.println("<html>");
       out.println("<head>");
@@ -43,11 +59,15 @@ public class RegistrasiPasien extends HttpServlet {
       out.println("</head>");
       out.println("<body>");
       out.println("<h1>Servlet RegistrasiPasien at " + request.getContextPath() + "</h1>");
+      out.println(nama + username + password + tempatLahir + tanggalLahir + jenisKelamin + status + pekerjaan + nomorTelepon + alamat + foto);
       out.println("</body>");
       out.println("</html>");
+        
+    
     }
-    Pasien pasien = new Pasien("qwqwTEST", "ole", "oleerer", "hoeyyy", "werwerwer", "L", "status", "oleole", "987987", "232", "hoey");
-    pf.create(pasien);
+    
+    //Pasien pasien = new Pasien("qwqwTEST", "ole", "oleerer", "hoeyyy", "werwerwer", "L", "status", "oleole", "987987", "232", "hoey");
+    
   }
 
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
