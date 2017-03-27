@@ -30,7 +30,9 @@ public class PasienServlet extends HttpServlet {
           throws ServletException, IOException {
     String action = request.getParameter("action");
     String id_pasienStr = request.getParameter("id_pasien");
-    int id_pasien = id_pasienStr.equals("") ? 0 : Integer.parseInt(id_pasienStr);
+    int id_pasien = 0;
+    if(id_pasienStr!= null && !id_pasienStr.equals(""))
+      id_pasien = Integer.parseInt(id_pasienStr);
     String nama = request.getParameter("nama");
     String username = request.getParameter("username");
     String password = request.getParameter("password");
@@ -45,22 +47,21 @@ public class PasienServlet extends HttpServlet {
     
     Pasien pasien = new Pasien(id_pasien, nama, username, password, tempat_lahir, tanggal_lahir, jenis_kelamin, status, pekerjaan, nomor_telepon, alamat, foto);
 //    PasienFacade pf = new PasienFacade();
-    if(action.equalsIgnoreCase("Add")){
+    if("Add".equalsIgnoreCase(action)){
       pasienDao.addPasien(pasien);
 //      pf.create(pasien);
-      
     }
-    else if(action.equals("Edit")) {
+    else if("Edit".equalsIgnoreCase(action)) {
       pasienDao.editPasien(pasien);
     }
-    else if(action.equals("Delete")) {
+    else if("Delete".equalsIgnoreCase(action)) {
       pasienDao.deletePasien(id_pasien);
-    } else if(action.equals("Search")) {
+    } else if("Search".equalsIgnoreCase(action)) {
       pasien = pasienDao.getPasien(id_pasien);
     }
     request.setAttribute("pasien", pasien);
     request.setAttribute("allPasien", pasienDao.getAllPasien());
-    request.getRequestDispatcher("pasieninfo.jsp").forward(request, response);
+    request.getRequestDispatcher("register.jsp").forward(request, response);
   }
 
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
