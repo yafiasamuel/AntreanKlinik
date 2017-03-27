@@ -5,9 +5,9 @@
  */
 package controller;
 
-import dao.PasienDAO;
 import dao.PasienDAOLocal;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,88 +19,95 @@ import service.PasienFacade;
 
 /**
  *
- * @author Dytra
+ * @author ChrisTz
  */
 @WebServlet(name = "PasienServlet", urlPatterns = {"/PasienServlet"})
 public class PasienServlet extends HttpServlet {
   @EJB
-  private PasienDAOLocal pasienDao;
+  private PasienFacade pf;
  
-  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
+  
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+    System.out.println("hello");
     String action = request.getParameter("action");
-    String id_pasienStr = request.getParameter("id_pasien");
-    int id_pasien = 0;
-    if(id_pasienStr!= null && !id_pasienStr.equals(""))
-      id_pasien = Integer.parseInt(id_pasienStr);
+      
     String nama = request.getParameter("nama");
     String username = request.getParameter("username");
     String password = request.getParameter("password");
-    String tempat_lahir = request.getParameter("tempat_lahir");
-    String tanggal_lahir = request.getParameter("tanggal_lahir");
-    String jenis_kelamin = request.getParameter("jenis_kelamin");
+    String tempatLahir = request.getParameter("tempatLahir");
+    String tanggalLahir = request.getParameter("tanggalLahir");
+    String jenisKelamin = request.getParameter("jenisKelamin");
     String status = request.getParameter("status");
     String pekerjaan = request.getParameter("pekerjaan");
-    String nomor_telepon = request.getParameter("nomor_telepon");
+    String nomorTelepon = request.getParameter("nomorTelepon");
     String alamat = request.getParameter("alamat");
     String foto = request.getParameter("foto");
     
-    Pasien pasien = new Pasien(id_pasien, nama, username, password, tempat_lahir, tanggal_lahir, jenis_kelamin, status, pekerjaan, nomor_telepon, alamat, foto);
+    Pasien pasien = new Pasien(username, nama, password, tempatLahir, tanggalLahir, jenisKelamin, status, pekerjaan, nomorTelepon, alamat, foto);
 //    PasienFacade pf = new PasienFacade();
-    if("Add".equalsIgnoreCase(action)){
-      pasienDao.addPasien(pasien);
+    if("daftara".equalsIgnoreCase(action)){
+    pf.create(pasien);
 //      pf.create(pasien);
     }
     else if("Edit".equalsIgnoreCase(action)) {
-      pasienDao.editPasien(pasien);
+      pf.edit(pasien);
     }
     else if("Delete".equalsIgnoreCase(action)) {
-      pasienDao.deletePasien(id_pasien);
-    } else if("Search".equalsIgnoreCase(action)) {
-      pasien = pasienDao.getPasien(id_pasien);
+      pf.remove(pasien);
     }
     request.setAttribute("pasien", pasien);
-    request.setAttribute("allPasien", pasienDao.getAllPasien());
+    //request.setAttribute("allPasien", pasienDao.getAllPasien());
     request.getRequestDispatcher("register.jsp").forward(request, response);
-  }
+    }
 
-  // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-  /**
-   * Handles the HTTP <code>GET</code> method.
-   *
-   * @param request servlet request
-   * @param response servlet response
-   * @throws ServletException if a servlet-specific error occurs
-   * @throws IOException if an I/O error occurs
-   */
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-    processRequest(request, response);
-  }
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
-  /**
-   * Handles the HTTP <code>POST</code> method.
-   *
-   * @param request servlet request
-   * @param response servlet response
-   * @throws ServletException if a servlet-specific error occurs
-   * @throws IOException if an I/O error occurs
-   */
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-    processRequest(request, response);
-  }
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
-  /**
-   * Returns a short description of the servlet.
-   *
-   * @return a String containing servlet description
-   */
-  @Override
-  public String getServletInfo() {
-    return "Short description";
-  }// </editor-fold>
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 
 }
