@@ -4,12 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/AntreanKlinik/src/java/service/AbstractFacade.java</file>
-            <file>file:/C:/AntreanKlinik/src/java/dao/PasienDAO.java</file>
+            <file>file:/C:/AntreanKlinik/web/index.html</file>
             <file>file:/C:/AntreanKlinik/src/java/service/PasienFacade.java</file>
-            <file>file:/C:/AntreanKlinik/src/java/dao/PasienDAOLocal.java</file>
+            <file>file:/C:/AntreanKlinik/src/java/controller/RegistrasiPasien.java</file>
+            <file>file:/C:/AntreanKlinik/web/registrasi.jsp</file>
             <file>file:/C:/AntreanKlinik/src/java/model/Pasien.java</file>
             <file>file:/C:/AntreanKlinik/src/java/controller/PasienServlet.java</file>
-            <file>file:/C:/AntreanKlinik/web/register.jsp</file>
         </group>
     </open-files>
 </project-private>
