@@ -14,11 +14,18 @@
     <link rel="stylesheet" href="assets/main.css" />
   </head>
   <body>
-    <div class="main">
-    <form action="LoginServlet" method="post" class="ui form" id="formlogin">
-      <input type="text" name="username" placeholder="Username..." /> <br>
-      <input type="password" name="password" placeholder="Password..." /> <br>
-      <input type="submit" class="ui teal button" name="login" />
+    <div class="main ui stackable centered page grid">
+    <form action="LoginServlet" method="post" class="ui form column eight wide segment" id="formlogin">
+      <h1>Login</h1>
+      <div class="field">
+        <input type="text" name="username" placeholder="Username..." /> 
+      </div>
+      <div class="field">
+        <input type="password" name="password" placeholder="Password..." />
+      </div>
+      <div class="field ui centered page grid">
+        <input type="submit" class="fluid ui huge teal button" name="login" value="Login" />
+      </div>
       
     </form>
     </div>
