@@ -11,6 +11,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Registrasi Pasien</title>
     <link rel="stylesheet" href="assets/semantic.min.css" />
+
   </head>
   <body>
     <div class="ui stackable sixten column grid">
@@ -73,21 +74,23 @@
               <label>Foto</label>
               <input type="text" name="foto" placeholder="Foto" value="${pasien.foto}" required><br />
             </div>
+
             <div class="ui buttons">
               <input type="submit" class="ui big positive teal button" name="action" value="daftar">
               <div class="or"></div>
               <input type="reset" class="ui big button" Value="Clear">
             </div>
           </form>
+
+          <div class="four wide column"></div>
         </div>
-        <div class="four wide column"></div>
       </div>
-    </div>
-    <script src="assets/semantic.min.js"/>
-    <script type="text/javascript">
-      $('select.dropdown')
-              .dropdown()
-              ;
-    </script>
+      <script src="assets/jquery-3.2.0.min.js" ></script>
+      <script src="assets/semantic.min.js" ></script>
+      <script>
+        $('.ui.dropdown')
+                .dropdown()
+                ;
+      </script>
   </body>
 </html>
