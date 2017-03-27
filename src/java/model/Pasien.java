@@ -9,8 +9,6 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -28,40 +26,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
   @NamedQuery(name = "Pasien.findAll", query = "SELECT p FROM Pasien p")
-  , @NamedQuery(name = "Pasien.findByIdPasien", query = "SELECT p FROM Pasien p WHERE p.idPasien = :idPasien")
-  , @NamedQuery(name = "Pasien.findByNama", query = "SELECT p FROM Pasien p WHERE p.nama = :nama")
   , @NamedQuery(name = "Pasien.findByUsername", query = "SELECT p FROM Pasien p WHERE p.username = :username")
+  , @NamedQuery(name = "Pasien.findByNama", query = "SELECT p FROM Pasien p WHERE p.nama = :nama")
   , @NamedQuery(name = "Pasien.findByPassword", query = "SELECT p FROM Pasien p WHERE p.password = :password")
   , @NamedQuery(name = "Pasien.findByTempatLahir", query = "SELECT p FROM Pasien p WHERE p.tempatLahir = :tempatLahir")
   , @NamedQuery(name = "Pasien.findByTanggalLahir", query = "SELECT p FROM Pasien p WHERE p.tanggalLahir = :tanggalLahir")
   , @NamedQuery(name = "Pasien.findByJenisKelamin", query = "SELECT p FROM Pasien p WHERE p.jenisKelamin = :jenisKelamin")
   , @NamedQuery(name = "Pasien.findByStatus", query = "SELECT p FROM Pasien p WHERE p.status = :status")
   , @NamedQuery(name = "Pasien.findByPekerjaan", query = "SELECT p FROM Pasien p WHERE p.pekerjaan = :pekerjaan")
-  , @NamedQuery(name = "Pasien.findByNomorTelepon", query = "SELECT p FROM Pasien p WHERE p.nomorTelepon = :nomorTelepon")
+  , @NamedQuery(name = "Pasien.findByNomorTelpon", query = "SELECT p FROM Pasien p WHERE p.nomorTelpon = :nomorTelpon")
   , @NamedQuery(name = "Pasien.findByAlamat", query = "SELECT p FROM Pasien p WHERE p.alamat = :alamat")
-  , @NamedQuery(name = "Pasien.findByFoto", query = "SELECT p FROM Pasien p WHERE p.foto = :foto")
-  , @NamedQuery(name = "Pasien.getAll",query="SELECT e FROM Pasien e")})
+  , @NamedQuery(name = "Pasien.findByFoto", query = "SELECT p FROM Pasien p WHERE p.foto = :foto")})
 public class Pasien implements Serializable {
 
   private static final long serialVersionUID = 1L;
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Basic(optional = false)
-  @Column(name = "id_pasien")
-  private Integer idPasien;
   @Basic(optional = false)
   @NotNull
-  @Size(min = 1, max = 100)
-  @Column(name = "nama")
-  private String nama;
-  @Basic(optional = false)
-  @NotNull
-  @Size(min = 1, max = 100)
+  @Size(min = 1, max = 25)
   @Column(name = "username")
   private String username;
   @Basic(optional = false)
   @NotNull
-  @Size(min = 1, max = 100)
+  @Size(min = 1, max = 50)
+  @Column(name = "nama")
+  private String nama;
+  @Basic(optional = false)
+  @NotNull
+  @Size(min = 1, max = 25)
   @Column(name = "password")
   private String password;
   @Basic(optional = false)
@@ -76,67 +68,54 @@ public class Pasien implements Serializable {
   private String tanggalLahir;
   @Basic(optional = false)
   @NotNull
-  @Size(min = 1, max = 20)
+  @Size(min = 1, max = 10)
   @Column(name = "jenis_kelamin")
   private String jenisKelamin;
-  @Size(max = 25)
+  @Basic(optional = false)
+  @NotNull
+  @Size(min = 1, max = 10)
   @Column(name = "status")
   private String status;
   @Basic(optional = false)
   @NotNull
-  @Size(min = 1, max = 50)
+  @Size(min = 1, max = 25)
   @Column(name = "pekerjaan")
   private String pekerjaan;
   @Basic(optional = false)
   @NotNull
-  @Size(min = 1, max = 50)
-  @Column(name = "nomor_telepon")
-  private String nomorTelepon;
+  @Size(min = 1, max = 15)
+  @Column(name = "nomor_telpon")
+  private String nomorTelpon;
   @Basic(optional = false)
   @NotNull
-  @Size(min = 1, max = 100)
+  @Size(min = 1, max = 255)
   @Column(name = "alamat")
   private String alamat;
-  @Size(max = 100)
+  @Basic(optional = false)
+  @NotNull
+  @Size(min = 1, max = 255)
   @Column(name = "foto")
   private String foto;
 
   public Pasien() {
   }
 
-  public Pasien(Integer idPasien) {
-    this.idPasien = idPasien;
+  public Pasien(String username) {
+    this.username = username;
   }
 
-  public Pasien(Integer idPasien, String nama, String username, String password, String tempatLahir, String tanggalLahir, String jenisKelamin, String status,String pekerjaan, String nomorTelepon, String alamat, String foto) {
-    this.idPasien = idPasien;
-    this.nama = nama;
+  public Pasien(String username, String nama, String password, String tempatLahir, String tanggalLahir, String jenisKelamin, String status, String pekerjaan, String nomorTelpon, String alamat, String foto) {
     this.username = username;
+    this.nama = nama;
     this.password = password;
     this.tempatLahir = tempatLahir;
     this.tanggalLahir = tanggalLahir;
     this.jenisKelamin = jenisKelamin;
     this.status = status;
     this.pekerjaan = pekerjaan;
-    this.nomorTelepon = nomorTelepon;
+    this.nomorTelpon = nomorTelpon;
     this.alamat = alamat;
     this.foto = foto;
-  }
-
-  public Integer getIdPasien() {
-    return idPasien;
-  }
-
-  public void setIdPasien(Integer idPasien) {
-    this.idPasien = idPasien;
-  }
-
-  public String getNama() {
-    return nama;
-  }
-
-  public void setNama(String nama) {
-    this.nama = nama;
   }
 
   public String getUsername() {
@@ -145,6 +124,14 @@ public class Pasien implements Serializable {
 
   public void setUsername(String username) {
     this.username = username;
+  }
+
+  public String getNama() {
+    return nama;
+  }
+
+  public void setNama(String nama) {
+    this.nama = nama;
   }
 
   public String getPassword() {
@@ -195,12 +182,12 @@ public class Pasien implements Serializable {
     this.pekerjaan = pekerjaan;
   }
 
-  public String getNomorTelepon() {
-    return nomorTelepon;
+  public String getNomorTelpon() {
+    return nomorTelpon;
   }
 
-  public void setNomorTelepon(String nomorTelepon) {
-    this.nomorTelepon = nomorTelepon;
+  public void setNomorTelpon(String nomorTelpon) {
+    this.nomorTelpon = nomorTelpon;
   }
 
   public String getAlamat() {
@@ -222,7 +209,7 @@ public class Pasien implements Serializable {
   @Override
   public int hashCode() {
     int hash = 0;
-    hash += (idPasien != null ? idPasien.hashCode() : 0);
+    hash += (username != null ? username.hashCode() : 0);
     return hash;
   }
 
@@ -233,7 +220,7 @@ public class Pasien implements Serializable {
       return false;
     }
     Pasien other = (Pasien) object;
-    if ((this.idPasien == null && other.idPasien != null) || (this.idPasien != null && !this.idPasien.equals(other.idPasien))) {
+    if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username))) {
       return false;
     }
     return true;
@@ -241,7 +228,7 @@ public class Pasien implements Serializable {
 
   @Override
   public String toString() {
-    return "model.Pasien[ idPasien=" + idPasien + " ]";
+    return "model.Pasien[ username=" + username + " ]";
   }
   
 }
