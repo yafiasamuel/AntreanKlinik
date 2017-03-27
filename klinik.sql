@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2017 at 05:24 AM
+-- Generation Time: Mar 27, 2017 at 04:48 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `klinik`
 --
+CREATE DATABASE IF NOT EXISTS `klinik` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `klinik`;
 
 -- --------------------------------------------------------
 
@@ -40,19 +42,28 @@ CREATE TABLE `antrean` (
 --
 
 CREATE TABLE `pasien` (
-  `id_pasien` int(11) NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
+  `username` varchar(25) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `password` varchar(25) NOT NULL,
   `tempat_lahir` varchar(50) NOT NULL,
   `tanggal_lahir` varchar(50) NOT NULL,
-  `jenis_kelamin` varchar(20) NOT NULL,
-  `status` varchar(25) DEFAULT NULL,
-  `pekerjaan` varchar(50) NOT NULL,
-  `nomor_telepon` varchar(50) NOT NULL,
-  `alamat` varchar(100) NOT NULL,
-  `foto` varchar(100) DEFAULT NULL
+  `jenis_kelamin` varchar(10) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  `pekerjaan` varchar(25) NOT NULL,
+  `nomor_telpon` varchar(15) NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `foto` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pasien`
+--
+
+INSERT INTO `pasien` (`username`, `nama`, `password`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `status`, `pekerjaan`, `nomor_telpon`, `alamat`, `foto`) VALUES
+('111qwqwTEST', 'ole', 'oleerer', 'hoeyyy', 'werwerwer', 'L', 'status', 'oleole', '987987', '232', 'hoey'),
+('oiuoiu', 'ole', 'oleerer', 'hoeyyy', 'werwerwer', 'L', 'status', 'oleole', '987987', '232', 'hoey'),
+('qwqwTEST', 'ole', 'oleerer', 'hoeyyy', 'werwerwer', 'L', 'status', 'oleole', '987987', '232', 'hoey'),
+('TEST', 'ole', 'oleerer', 'hoeyyy', 'werwerwer', 'L', 'status', 'oleole', '987987', '232', 'hoey');
 
 -- --------------------------------------------------------
 
@@ -78,16 +89,10 @@ INSERT INTO `pasientest` (`idPasien`, `nama`, `gender`) VALUES
 --
 
 --
--- Indexes for table `antrean`
---
-ALTER TABLE `antrean`
-  ADD PRIMARY KEY (`id_antrean`);
-
---
 -- Indexes for table `pasien`
 --
 ALTER TABLE `pasien`
-  ADD PRIMARY KEY (`id_pasien`);
+  ADD PRIMARY KEY (`username`);
 
 --
 -- Indexes for table `pasientest`
@@ -99,16 +104,6 @@ ALTER TABLE `pasientest`
 -- AUTO_INCREMENT for dumped tables
 --
 
---
--- AUTO_INCREMENT for table `antrean`
---
-ALTER TABLE `antrean`
-  MODIFY `id_antrean` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `pasien`
---
-ALTER TABLE `pasien`
-  MODIFY `id_pasien` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `pasientest`
 --
