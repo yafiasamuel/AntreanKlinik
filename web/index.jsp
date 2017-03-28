@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
   <head>
-    <title>Antrean Klinik Online</title>
+    <title>The Antrean Klinik Online</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/semantic.min.css" />
