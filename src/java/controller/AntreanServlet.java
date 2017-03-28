@@ -46,7 +46,9 @@ public class AntreanServlet extends HttpServlet {
       out.println("</body>");
       out.println("</html>");
     }
-    Antrean antrean = new Antrean("username", 0, "01-01-1993");
+    String tanggalAntrean = request.getParameter("tanggalAntrean");
+    String keluhan = request.getParameter("keluhan");
+    Antrean antrean = new Antrean("username", 0, tanggalAntrean,keluhan);
     af.create(antrean);
     
   }
