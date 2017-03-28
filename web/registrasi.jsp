@@ -36,11 +36,11 @@
               <div class="two fields">
                 <div class="field">
                   <label>Tempat</label>
-                  <input type="text" name="tempat_lahir" placeholder="tempatLahir" value="${pasien.tempatLahir}">
+                  <input type="text" name="tempat_lahir" placeholder="tempat Lahir" value="${pasien.tempatLahir}">
                 </div>
                 <div class="field">
                   <label>Tanggal Lahir</label>
-                  <input type="date" name="tanggal_lahir" placeholder="tanggalLahir" value="${pasien.tanggalLahir}" required>
+                  <input type="date" name="tanggal_lahir" placeholder="tanggal Lahir" value="${pasien.tanggalLahir}" required>
                 </div>
               </div>
             </div>
