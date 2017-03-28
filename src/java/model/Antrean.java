@@ -37,7 +37,7 @@ public class Antrean implements Serializable {
 
   private static final long serialVersionUID = 1L;
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.TABLE)
   @Basic(optional = false)
   @Column(name = "id_antrean")
   private Integer idAntrean;
@@ -67,6 +67,13 @@ public class Antrean implements Serializable {
   }
 
   public Antrean(Integer idAntrean, String username, int nomorAntrean, String tanggalAntrean) {
+    this.idAntrean = idAntrean;
+    this.username = username;
+    this.nomorAntrean = nomorAntrean;
+    this.tanggalAntrean = tanggalAntrean;
+  }
+  
+    public Antrean(String username, int nomorAntrean, String tanggalAntrean) {
     this.idAntrean = idAntrean;
     this.username = username;
     this.nomorAntrean = nomorAntrean;
