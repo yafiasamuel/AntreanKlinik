@@ -9,9 +9,27 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>JSP Page</title>
+    <title>Daftar Antrean</title>
+    <link rel="stylesheet" href="assets/semantic.min.css" />
+    <link rel="stylesheet" href="assets/main.css" />
   </head>
   <body>
-    <h1>Hello World!</h1>
+    <div class="main ui stackable centered page grid">
+      <form action="AntreanServlet" method="post" class="ui form column eight wide segment">
+        <h1>Daftar Antrean</h1>
+        <div class="field">
+          <label>Tanggal Antrean</label>
+          <input type="date" name="tanggalAntrean" /> 
+        </div>
+        <div class="field">
+          <label>Keluhan</label>
+          <textarea name="keluhan"> 
+          </textarea>
+        </div>
+        <div class="field ui centered page grid">
+        <input type="submit" name="submit" class="fluid ui huge blue button" value="Daftar Antrean" />
+      </div>
+      </form>
+    </div>
   </body>
 </html>
