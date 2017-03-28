@@ -11,7 +11,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Registrasi Pasien</title>
     <link rel="stylesheet" href="assets/semantic.min.css" />
-
+    <script src="assets/jquery-3.2.0.min.js" ></script>
+    <script src="assets/semantic.min.js" ></script>
   </head>
   <body>
     <div class="ui stackable sixten column grid">
@@ -84,13 +85,13 @@
 
           <div class="four wide column"></div>
         </div>
+        <script>
+          $('.ui.dropdown')
+                  .dropdown()
+                  ;
+        </script>
       </div>
-      <script src="assets/jquery-3.2.0.min.js" ></script>
-      <script src="assets/semantic.min.js" ></script>
-      <script>
-        $('.ui.dropdown')
-                .dropdown()
-                ;
-      </script>
+
+
   </body>
 </html>
