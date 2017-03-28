@@ -72,12 +72,13 @@ public class Antrean implements Serializable {
     this.nomorAntrean = nomorAntrean;
     this.tanggalAntrean = tanggalAntrean;
   }
-  
-    public Antrean(String username, int nomorAntrean, String tanggalAntrean) {
-    this.idAntrean = idAntrean;
+
+  public Antrean(String username, int nomorAntrean, String tanggalAntrean, String keluhan) {
+
     this.username = username;
     this.nomorAntrean = nomorAntrean;
     this.tanggalAntrean = tanggalAntrean;
+    this.keluhan = keluhan;
   }
 
   public Integer getIdAntrean() {
@@ -144,5 +145,5 @@ public class Antrean implements Serializable {
   public String toString() {
     return "model.Antrean[ idAntrean=" + idAntrean + " ]";
   }
-  
+
 }
