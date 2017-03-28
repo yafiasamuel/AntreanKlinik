@@ -46,8 +46,9 @@ public class AntreanServlet extends HttpServlet {
       out.println("</body>");
       out.println("</html>");
     }
-    Antrean antrean = new Antrean(0, "username", 0, "01-01-1993");
+    Antrean antrean = new Antrean("username", 0, "01-01-1993");
     af.create(antrean);
+    
   }
 
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
