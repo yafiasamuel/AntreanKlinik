@@ -3,3 +3,8 @@ dist/
 nbproject/private/private.properties
 nbproject/private/private.xml
 nbproject/project.properties
+build.xml
+nbproject/ant-deploy.xml
+nbproject/build-impl.xml
+nbproject/genfiles.properties
+nbproject/project.xml
