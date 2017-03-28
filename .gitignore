@@ -10,3 +10,5 @@ nbproject/private/private.properties
 nbproject/genfiles.properties
 nbproject/private/private.xml
 *.properties
+nbproject/project.properties
+*.properties
