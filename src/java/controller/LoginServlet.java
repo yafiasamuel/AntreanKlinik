@@ -7,12 +7,12 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Pasien;
 import service.PasienFacade;
 
@@ -39,7 +39,9 @@ public class LoginServlet extends HttpServlet {
     response.setContentType("text/html;charset=UTF-8");
 
     Pasien res = pf.find(request.getParameter("username"));
-
+    HttpSession session = request.getSession();
+    session.setAttribute("username", request.getParameter("username"));
+    String sessionUsername = session.getAttribute("username").toString();
     try (PrintWriter out = response.getWriter()) {
       /* TODO output your page here. You may use following sample code. */
       out.println("<!DOCTYPE html>");
@@ -49,6 +51,7 @@ public class LoginServlet extends HttpServlet {
       out.println("</head>");
       out.println("<body>");
       out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
+      out.println(sessionUsername);
       if (res == null) {
         out.println("it's null");
       } else {
@@ -63,6 +66,7 @@ public class LoginServlet extends HttpServlet {
       out.println("</body>");
       out.println("</html>");
     }
+
 
   }
 
