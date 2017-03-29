@@ -12,7 +12,7 @@
         <title>Tambah Data</title>
     </head>
     <body>
-        <form action="POST">
+        <form action="CRUDpasien" method="POST">
         <p><input type="text" placeholder="Username" name="username"></p>
         <p><input type="text" placeholder="Nama" name="nama"></p>
         <p><input type="text" placeholder="Password" name="password"></p>
