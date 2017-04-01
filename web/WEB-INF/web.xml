@@ -24,6 +24,10 @@
         <servlet-name>api</servlet-name>
         <servlet-class>controller.api</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CRUDantrian</servlet-name>
+        <servlet-class>controller.CRUDantrian</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrasiPasien</servlet-name>
         <url-pattern>/RegistrasiPasien</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>api</servlet-name>
         <url-pattern>/api</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CRUDantrian</servlet-name>
+        <url-pattern>/CRUDantrian</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
