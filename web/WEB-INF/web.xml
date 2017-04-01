@@ -11,7 +11,10 @@
     <servlet>
         <servlet-name>AntreanServlet</servlet-name>
         <servlet-class>controller.AntreanServlet</servlet-class>
-    </servlet>
+   </servlet>
+        <servlet-name>CRUDpasien</servlet-name>
+        <servlet-class>controller.CRUDpasien</servlet-class>
+	 
     <servlet-mapping>
         <servlet-name>RegistrasiPasien</servlet-name>
         <url-pattern>/RegistrasiPasien</url-pattern>
@@ -23,6 +26,10 @@
     <servlet-mapping>
         <servlet-name>AntreanServlet</servlet-name>
         <url-pattern>/AntreanServlet</url-pattern>
+		</servlet-mapping>
+		<servlet-mapping>
+        <servlet-name>CRUDpasien</servlet-name>
+        <url-pattern>/CRUDpasien</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
