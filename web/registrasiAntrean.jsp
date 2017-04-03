@@ -15,7 +15,7 @@
   </head>
   <body>
     <div class="main ui stackable centered page grid">
-      <form action="AntreanServlet" method="post" class="ui form column eight wide segment">
+      <form action="RegistrasiAntrean" method="post" class="ui form column eight wide segment">
         <h1>Daftar Antrean</h1>
         <div class="field">
           <label>Tanggal Antrean</label>

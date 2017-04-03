@@ -7,6 +7,8 @@ package service;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import model.Antrean;
 
 /**
  *
@@ -25,12 +27,14 @@ public abstract class AbstractFacade<T> {
   public void create(T entity) {
     getEntityManager().persist(entity);
   }
+
   public void createAntrean(T entity) {
     getEntityManager().persist(entity);
     getEntityManager().flush();
     getEntityManager().refresh(entity);
-    
+
   }
+
   public void edit(T entity) {
     getEntityManager().merge(entity);
   }
@@ -65,5 +69,12 @@ public abstract class AbstractFacade<T> {
     javax.persistence.Query q = getEntityManager().createQuery(cq);
     return ((Long) q.getSingleResult()).intValue();
   }
-  
+
+  public List<Antrean> getCurrentAntrean() {
+    String arg1 = "08-04-1996";
+    Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.tanggalAntrean=:arg1");
+    query.setParameter("arg1", arg1);
+    return query.getResultList();
+  }
+
 }

@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
     HttpSession session = request.getSession();
     session.setAttribute("username", request.getParameter("username"));
     String sessionUsername = session.getAttribute("username").toString();
+
     try (PrintWriter out = response.getWriter()) {
       /* TODO output your page here. You may use following sample code. */
       out.println("<!DOCTYPE html>");

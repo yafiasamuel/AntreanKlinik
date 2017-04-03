@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
   , @NamedQuery(name = "Antrean.findByUsername", query = "SELECT a FROM Antrean a WHERE a.username = :username")
   , @NamedQuery(name = "Antrean.findByNomorAntrean", query = "SELECT a FROM Antrean a WHERE a.nomorAntrean = :nomorAntrean")
   , @NamedQuery(name = "Antrean.findByTanggalAntrean", query = "SELECT a FROM Antrean a WHERE a.tanggalAntrean = :tanggalAntrean")
+  , @NamedQuery(name = "Antrean.findByStatus", query = "SELECT a FROM Antrean a WHERE a.status = :status")
   , @NamedQuery(name = "Antrean.findByKeluhan", query = "SELECT a FROM Antrean a WHERE a.keluhan = :keluhan")})
 public class Antrean implements Serializable {
 
@@ -55,6 +56,9 @@ public class Antrean implements Serializable {
   @Size(min = 1, max = 50)
   @Column(name = "tanggal_antrean")
   private String tanggalAntrean;
+  @Size(max = 50)
+  @Column(name = "status")
+  private String status;
   @Size(max = 250)
   @Column(name = "keluhan")
   private String keluhan;
@@ -73,11 +77,11 @@ public class Antrean implements Serializable {
     this.tanggalAntrean = tanggalAntrean;
   }
 
-  public Antrean(String username, int nomorAntrean, String tanggalAntrean, String keluhan) {
-
+  public Antrean(String username, int nomorAntrean, String tanggalAntrean, String status, String keluhan) {
     this.username = username;
     this.nomorAntrean = nomorAntrean;
     this.tanggalAntrean = tanggalAntrean;
+    this.status = status;
     this.keluhan = keluhan;
   }
 
@@ -113,6 +117,14 @@ public class Antrean implements Serializable {
     this.tanggalAntrean = tanggalAntrean;
   }
 
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
   public String getKeluhan() {
     return keluhan;
   }
@@ -145,5 +157,5 @@ public class Antrean implements Serializable {
   public String toString() {
     return "model.Antrean[ idAntrean=" + idAntrean + " ]";
   }
-
+  
 }

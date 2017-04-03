@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Antrean;
 import service.AntreanFacade;
 
@@ -19,9 +20,11 @@ import service.AntreanFacade;
  *
  * @author Dytra
  */
-public class AntreanServlet extends HttpServlet {
+public class RegistrasiAntrean extends HttpServlet {
+
   @EJB
   AntreanFacade af;
+
   /**
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
    * methods.
@@ -34,19 +37,24 @@ public class AntreanServlet extends HttpServlet {
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
+    HttpSession session = request.getSession();
+    String username = session.getAttribute("username").toString();
     try (PrintWriter out = response.getWriter()) {
       /* TODO output your page here. You may use following sample code. */
       out.println("<!DOCTYPE html>");
       out.println("<html>");
       out.println("<head>");
-      out.println("<title>Servlet AntreanServlet</title>");      
+      out.println("<title>Servlet RegistrasiAntrean</title>");
       out.println("</head>");
       out.println("<body>");
-      out.println("<h1>Servlet AntreanServlet at " + request.getContextPath() + "</h1>");
+      out.println("<h1>Servlet RegistrasiAntrean at " + request.getContextPath() + "</h1>");
+      out.println(username);
       out.println("</body>");
       out.println("</html>");
     }
-    Antrean antrean = new Antrean("username", 0, "08-04-1996", "statusku", "keluhanku");
+    String tanggalAntrean = request.getParameter("tanggalAntrean");
+    String keluhan = request.getParameter("keluhan");
+    Antrean antrean = new Antrean(username, 0, tanggalAntrean, "mengantre", keluhan);
     af.create(antrean);
   }
 
