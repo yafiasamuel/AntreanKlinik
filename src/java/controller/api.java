@@ -5,6 +5,7 @@
  */
 package controller;
 
+import com.sun.corba.se.impl.orbutil.ObjectWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Antrean;
-import model.Pasien;
 import service.AntreanFacade;
 
 /**
@@ -33,8 +33,9 @@ public class api extends HttpServlet {
     
     List <Antrean> la = af.getCurrentAntrean();
     
-
+    //json
     
+
     try (PrintWriter out = response.getWriter()) {
       /* TODO output your page here. You may use following sample code. */
       out.println("<!DOCTYPE html>");
