@@ -8,6 +8,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -58,6 +59,8 @@ public class LoginServlet extends HttpServlet {
       } else {
         if(res.getPassword().equals(request.getParameter("password"))) {
           out.println("selamat datang");
+          out.println ("<meta http-equiv=\"refresh\" content=\"0;url=http://localhost:8080/AntreanKlinik/registrasiAntrean.jsp\">");
+          
         } else {
           out.println("username atau password salah");
         }
