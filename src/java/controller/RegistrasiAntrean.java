@@ -47,7 +47,7 @@ public class RegistrasiAntrean extends HttpServlet {
       out.println("<title>Servlet RegistrasiAntrean</title>");
       out.println("</head>");
       out.println("<body>");
-      out.println("<h1>Servlet RegistrasiAntrean at " + request.getContextPath() + "</h1>");
+      out.println("<h1>Terima Kasih Telah Mendaftar </h1>");
       out.println(username);
       out.println("</body>");
       out.println("</html>");
