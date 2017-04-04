@@ -54,7 +54,8 @@ public class RegistrasiAntrean extends HttpServlet {
     }
     String tanggalAntrean = request.getParameter("tanggalAntrean");
     String keluhan = request.getParameter("keluhan");
-    Antrean antrean = new Antrean(username, 0, tanggalAntrean, "mengantre", keluhan);
+    int nomorAntrean = af.count() + 1;
+    Antrean antrean = new Antrean(username, nomorAntrean, tanggalAntrean, "mengantre", keluhan);
     af.create(antrean);
   }
 
