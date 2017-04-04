@@ -5,6 +5,8 @@
  */
 package service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -17,6 +19,7 @@ import model.Antrean;
 public abstract class AbstractFacade<T> {
 
   private Class<T> entityClass;
+  String globalDate = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
 
   public AbstractFacade(Class<T> entityClass) {
     this.entityClass = entityClass;
@@ -71,10 +74,30 @@ public abstract class AbstractFacade<T> {
   }
 
   public List<Antrean> getCurrentAntrean() {
-    String arg1 = "08-04-1996";
-    Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.tanggalAntrean=:arg1");
+    String arg1 = globalDate;
+    String arg2 = "diperiksa";
+    Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.tanggalAntrean=:arg1 and e.status=:arg2");
     query.setParameter("arg1", arg1);
+    query.setParameter("arg2", arg2);
     return query.getResultList();
   }
+
+  public List<Antrean> getAllCurrentAntrean() {
+
+    Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.tanggalAntrean=:arg1 and e.status=:arg2");
+    query.setParameter("arg1", globalDate);
+    query.setParameter("arg2", "mengantre");
+    return query.getResultList();
+  }
+
+  public Object getSingleCurrentAntrean() {
+
+    Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.tanggalAntrean=:arg1 and e.status=:arg2");
+    query.setParameter("arg1", globalDate);
+    query.setParameter("arg2", "diperiksa");
+    return query.getSingleResult();
+  }
+  
+
 
 }
