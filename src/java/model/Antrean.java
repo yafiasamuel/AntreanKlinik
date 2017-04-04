@@ -84,6 +84,11 @@ public class Antrean implements Serializable {
     this.status = status;
     this.keluhan = keluhan;
   }
+  
+  public Antrean(Integer idInteger, String keluhan) {
+    this.idAntrean = idInteger;
+    this.keluhan = keluhan;
+  }
 
   public Integer getIdAntrean() {
     return idAntrean;
