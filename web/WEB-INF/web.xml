@@ -24,6 +24,38 @@
         <servlet-name>api</servlet-name>
         <servlet-class>controller.api</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AntreanManager</servlet-name>
+        <servlet-class>controller.AntreanManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AntreanInfo</servlet-name>
+        <servlet-class>controller.AntreanInfo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PasienManager</servlet-name>
+        <servlet-class>controller.PasienManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PasienDelete</servlet-name>
+        <servlet-class>controller.PasienDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>testser</servlet-name>
+        <servlet-class>controller.testser</servlet-class>
+        <init-param>
+            <param-name>d</param-name>
+            <param-value/>
+        </init-param>
+    </servlet>
+    <servlet>
+        <servlet-name>yui</servlet-name>
+        <servlet-class>controller.yui</servlet-class>
+        <init-param>
+            <param-name>oleole</param-name>
+            <param-value>Value</param-value>
+        </init-param>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrasiPasien</servlet-name>
         <url-pattern>/RegistrasiPasien</url-pattern>
@@ -47,6 +79,30 @@
     <servlet-mapping>
         <servlet-name>api</servlet-name>
         <url-pattern>/api</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AntreanManager</servlet-name>
+        <url-pattern>/AntreanManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AntreanInfo</servlet-name>
+        <url-pattern>/AntreanInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PasienManager</servlet-name>
+        <url-pattern>/PasienManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PasienDelete</servlet-name>
+        <url-pattern>/PasienDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>testser</servlet-name>
+        <url-pattern>/testser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>yui</servlet-name>
+        <url-pattern>/yui</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
