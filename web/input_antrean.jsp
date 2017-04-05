@@ -12,12 +12,18 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action=".\CRUDantrian" method="post">
-            <input type="text" name="idantrian" placeholder="ID Antrian" ><br >
+        <form action=".\CRUDantrean" method="post">
+            <!--<input type="text" name="idantrian" placeholder="ID Antrian" ><br >-->
             <input type="text" name="username" placeholder="Username" ><br >
             <input type="text" name="nomor" placeholder="Nomor Antrian" ><br >
             <input type="date" name="tgl" ><br >
-            <input type="text" name="status" placeholder="Status" ><br >
+            <select name="status">
+                <option name="status" value="Mengantri">Mengantri</option>
+                <option name="status" value="Diperiksa">Diperiksa</option>
+                <option name="status" value="Skip">Skip</option>
+                <option name="status" value="Batal">Batal</option>
+            </select>
+                <br >
             <textarea name="keluhan" placeholder="keluhan" ></textarea><br >
             
               <input type="submit" name="action" value="input">
