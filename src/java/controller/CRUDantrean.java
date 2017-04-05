@@ -9,21 +9,23 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Pasien;
-import service.PasienFacade;
+import model.Antrean;
+import service.AntreanFacade;
 
 /**
  *
  * @author Yafia
  */
-public class CRUDpasien extends HttpServlet {
+@WebServlet(name = "CRUDantrean", urlPatterns = {"/CRUDantrean"})
+public class CRUDantrean extends HttpServlet {
 
-    @EJB
-    private PasienFacade pf;
-
+  @EJB
+  AntreanFacade af;
+   
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,21 +40,29 @@ public class CRUDpasien extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String nama = request.getParameter("nama");
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String tempatLahir = request.getParameter("tempatlahir");
-            String tanggalLahir = request.getParameter("tanggallahir");
-            String jenisKelamin = request.getParameter("jeniskelamin");
-            String status = request.getParameter("status");
-            String pekerjaan = request.getParameter("pekerjaan");
-            String nomorTelepon = request.getParameter("nomortelp");
-            String alamat = request.getParameter("alamat");
-            String foto = request.getParameter("foto");
-            Pasien pasien = new Pasien(username, nama, password, tempatLahir, tanggalLahir, jenisKelamin, status, pekerjaan, nomorTelepon, alamat, foto);
-            pf.create(pasien);
-            out.println(nama + username + password + tempatLahir + tanggalLahir + jenisKelamin + status + pekerjaan + nomorTelepon + alamat + foto);
+            
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet CRUDantrean</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet CRUDantrean at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
+        String  username = request.getParameter("username");
+            String nmr = request.getParameter("nomor");
+            int nomor =  Integer.parseInt(nmr);
+            String Status = request.getParameter("status");
+            String tanggalAntrean = request.getParameter("tgl");
+            String keluhan = request.getParameter("keluhan");
+            String action =  request.getParameter("action");
+            if(action.equalsIgnoreCase("input")){
+
+                Antrean antrean = new Antrean(username, nomor, tanggalAntrean, Status, keluhan);
+                af.create(antrean);
+            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -7,6 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,10 +19,10 @@ import service.AntreanFacade;
 
 /**
  *
- * @author ChrisTz
+ * @author Yafia
  */
-@WebServlet(name = "CRUDantrian", urlPatterns = {"/CRUDantrean"})
-public class CRUDantrian extends HttpServlet {
+@WebServlet(name = "RUDantrean", urlPatterns = {"/RUDantrean"})
+public class RUDantrean extends HttpServlet {
 
   @EJB
   AntreanFacade af;
@@ -34,40 +35,7 @@ public class CRUDantrian extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-                    String  username = request.getParameter("username");
-        String nmr = request.getParameter("nomor");
-        int nomor =  Integer.parseInt(nmr);
-        String Status = request.getParameter("status");
-        String tanggalAntrean = request.getParameter("tgl");
-        String keluhan = request.getParameter("keluhan");
-        String action =  request.getParameter("action");
-        
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CRUDantrean</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CRUDantrean at " + request.getContextPath() + "</h1>");
-            out.println(username+ nomor+tanggalAntrean + Status+keluhan);
-            out.println("</body>");
-            
-            out.println("</html>");
-     if(action.equalsIgnoreCase("input")){
-            Antrean antrean = new Antrean(username, nomor, tanggalAntrean, Status, keluhan);
-            af.create(antrean);
-     }
-        }
-        
-
-      
-    }
-
+   
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -80,7 +48,27 @@ public class CRUDantrian extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        if (request.getParameterMap().containsKey("e")) {
+            String id_antrean = request.getParameter("e");
+            Integer id = Integer.parseInt(id_antrean);
+            Antrean p = af.find(id);
+            request.setAttribute("p", p);
+        } else if (request.getParameterMap().containsKey("d")) {
+
+            response.setContentType("text/html;charset=UTF-8");
+            try (PrintWriter out = response.getWriter()) {
+                String id_antrean = request.getParameter("d");
+                Integer id = Integer.parseInt(id_antrean);
+                Antrean a = af.find(id);
+                af.remove(a);
+            }
+            String url = request.getContextPath() + "/listAntrean.jsp";
+//      response.sendRedirect(url);
+        } else {
+            List<Antrean> la = af.findAll();
+            request.setAttribute("ole", la);
+        }
     }
 
     /**
@@ -93,8 +81,28 @@ public class CRUDantrian extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+        throws ServletException, IOException {
+        String id_antrean = request.getParameter("id");
+        Integer id = Integer.parseInt(id_antrean);
+        String username = request.getParameter("username");
+        String nomor_antrean = request.getParameter("nomor");
+        int nomor = Integer.parseInt(nomor_antrean);
+        String tanggal_antrean = request.getParameter("tanggal_antrean");
+        String status = request.getParameter("status");
+        String keluhan = request.getParameter("keluhan");
+        
+        Antrean antrean = new Antrean(id,username, nomor, tanggal_antrean, status, keluhan);
+        
+        af.edit(antrean);
+
+        try (PrintWriter out = response.getWriter()) {
+            out.println(id);
+            out.println(username);
+            out.println(nomor);
+            out.println(tanggal_antrean);
+            out.println(status);
+            out.println(keluhan);
+        }
     }
 
     /**
@@ -106,5 +114,6 @@ public class CRUDantrian extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 
 }
