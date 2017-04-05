@@ -85,6 +85,15 @@ public class Antrean implements Serializable {
     this.keluhan = keluhan;
   }
   
+   public Antrean(Integer idAntrean,String username, int nomorAntrean, String tanggalAntrean, String status, String keluhan) {
+    this.idAntrean = idAntrean;
+    this.username = username;
+    this.nomorAntrean = nomorAntrean;
+    this.tanggalAntrean = tanggalAntrean;
+    this.status = status;
+    this.keluhan = keluhan;
+  }
+  
   public Antrean(Integer idInteger, String keluhan) {
     this.idAntrean = idInteger;
     this.keluhan = keluhan;
