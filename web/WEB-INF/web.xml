@@ -12,6 +12,22 @@
         <servlet-name>CRUDpasien</servlet-name>
         <servlet-class>controller.CRUDpasien</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AntreanServlet</servlet-name>
+        <servlet-class>controller.AntreanServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegistrasiAntrean</servlet-name>
+        <servlet-class>controller.RegistrasiAntrean</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>api</servlet-name>
+        <servlet-class>controller.api</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CRUDantrian</servlet-name>
+        <servlet-class>controller.CRUDantrian</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrasiPasien</servlet-name>
         <url-pattern>/RegistrasiPasien</url-pattern>
@@ -23,6 +39,22 @@
     <servlet-mapping>
         <servlet-name>CRUDpasien</servlet-name>
         <url-pattern>/CRUDpasien</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AntreanServlet</servlet-name>
+        <url-pattern>/AntreanServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistrasiAntrean</servlet-name>
+        <url-pattern>/RegistrasiAntrean</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>api</servlet-name>
+        <url-pattern>/api</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CRUDantrian</servlet-name>
+        <url-pattern>/CRUDantrian</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

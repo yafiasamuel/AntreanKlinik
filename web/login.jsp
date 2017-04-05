@@ -18,7 +18,7 @@
     <form action="LoginServlet" method="post" class="ui form column eight wide segment" id="formlogin">
       <h1>Login</h1>
       <div class="field">
-        <input type="text" name="username" placeholder="Username..." /> 
+        <input type="text" name="username" placeholder="Username..." value="" /> 
       </div>
       <div class="field">
         <input type="password" name="password" placeholder="Password..." />
