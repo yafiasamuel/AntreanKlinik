@@ -130,7 +130,7 @@ public class AntreanManager extends HttpServlet {
     editAntrean.setKeluhan(currentAntrean.getKeluhan());
     editAntrean.setNomorAntrean(currentAntrean.getNomorAntrean());
     editAntrean.setTanggalAntrean(currentAntrean.getTanggalAntrean());
-    editAntrean.setUsername(username);
+    editAntrean.setUsername(currentAntrean.getUsername());
     editAntrean.setStatus("selesai");
 
 //    begin edit
@@ -151,7 +151,7 @@ public class AntreanManager extends HttpServlet {
     editAntrean.setKeluhan(currentAntrean.getKeluhan());
     editAntrean.setNomorAntrean(currentAntrean.getNomorAntrean());
     editAntrean.setTanggalAntrean(currentAntrean.getTanggalAntrean());
-    editAntrean.setUsername(username);
+    editAntrean.setUsername(currentAntrean.getUsername());
     editAntrean.setStatus("diperiksa");
 //    begin edit
     af.edit(editAntrean);

@@ -39,24 +39,36 @@ public class RegistrasiAntrean extends HttpServlet {
     response.setContentType("text/html;charset=UTF-8");
     HttpSession session = request.getSession();
     String username = session.getAttribute("username").toString();
+    String status = "";
     try (PrintWriter out = response.getWriter()) {
-      /* TODO output your page here. You may use following sample code. */
+      
+      String tanggalAntrean = request.getParameter("tanggalAntrean");
+      String keluhan = request.getParameter("keluhan");
       out.println("<!DOCTYPE html>");
       out.println("<html>");
       out.println("<head>");
       out.println("<title>Servlet RegistrasiAntrean</title>");
       out.println("</head>");
       out.println("<body>");
-      out.println("<h1>Terima Kasih Telah Mendaftar </h1>");
+      //jika sudah mendaftar
+      if (af.getNumberOfAntreanByUser(username) >= 1) {
+        out.println("<h1>Anda telah mendaftar!</h2>");
+      } else {
+        if(af.getAntreanByTanggal(tanggalAntrean) == 0) {
+          status = "diperiksa";
+        } else {
+          status = "mengantre";
+        }
+        int nomorAntrean = af.generateNomorAntrean(tanggalAntrean) + 1;
+        Antrean antrean = new Antrean(username, nomorAntrean, tanggalAntrean, status, keluhan);
+        af.create(antrean);
+        out.println("<h1>Terima Kasih Telah Mendaftar </h1>");
+      }
       out.println(username);
       out.println("</body>");
       out.println("</html>");
     }
-    String tanggalAntrean = request.getParameter("tanggalAntrean");
-    String keluhan = request.getParameter("keluhan");
-    int nomorAntrean = af.count() + 1;
-    Antrean antrean = new Antrean(username, nomorAntrean, tanggalAntrean, "mengantre", keluhan);
-    af.create(antrean);
+
   }
 
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -28,8 +28,6 @@ public class AntreanInfo extends HttpServlet {
   @EJB
   AntreanFacade af;
 
-
-
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
   /**
    * Handles the HTTP <code>GET</code> method.
@@ -42,8 +40,13 @@ public class AntreanInfo extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-        Antrean antrean = (Antrean) af.getSingleCurrentAntrean();
-    request.setAttribute("message", antrean.getNomorAntrean());
+    Antrean antrean = (Antrean) af.getSingleCurrentAntrean();
+    int count = af.checkEmpty();
+    if (count == 0) {
+      request.setAttribute("currentAntrean", "Habis");
+    } else {
+      request.setAttribute("currentAntrean", count);
+    }
   }
 
   /**

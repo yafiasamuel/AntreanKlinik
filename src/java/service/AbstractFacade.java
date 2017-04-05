@@ -19,7 +19,7 @@ import model.Antrean;
 public abstract class AbstractFacade<T> {
 
   private Class<T> entityClass;
-  String globalDate = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
+  String globalDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 
   public AbstractFacade(Class<T> entityClass) {
     this.entityClass = entityClass;
@@ -97,6 +97,82 @@ public abstract class AbstractFacade<T> {
     query.setParameter("arg2", "diperiksa");
     return query.getSingleResult();
   }
+  
+  public Antrean getCurrentAntreanByUsername(String user) {
+    Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.username=:arg1");
+    query.setParameter("arg1", user);
+    return (Antrean) query.getSingleResult();
+  }
+  
+  
+  
+  public int getTotalCurrentAntrean(String tanggal) {
+    //api * mengambil total yang mengantre
+    Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.tanggalAntrean=:arg1 and (e.status=:arg2 or e.status=:arg3 or e.status=:arg4)");
+    query.setParameter("arg1", tanggal);
+    query.setParameter("arg2", "mengantre");
+    query.setParameter("arg3", "diperiksa");
+    query.setParameter("arg4", "selesai");
+    return query.getResultList().size();
+  }
+  
+  public int getNomorDiperiksa(String tanggalMengantre) {
+     Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.tanggalAntrean=:arg1 and e.status=:arg2");
+    query.setParameter("arg1", tanggalMengantre);
+    query.setParameter("arg2", "diperiksa");
+    //cek apakah blm ada yg periksa
+    int count = 0;
+    
+    List <Antrean> la = (List <Antrean>) query.getResultList();
+    int a = la.size();
+    if(a == 0)
+      count =0;
+    else
+      count = la.get(0).getNomorAntrean();
+    return count;
+    
+  }
+  
+  public int generateNomorAntrean(String tanggalAntrean) {
+    int count;
+    Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.tanggalAntrean=:arg1");
+    query.setParameter("arg1", tanggalAntrean);
+    List <Antrean> a = (List <Antrean>) query.getResultList();
+    if(a == null) {
+      count = 0;
+    } else {
+      count = a.size();
+    }
+    return count;
+  }
+  
+    public int getNumberOfAntreanByUser(String username) {
+    int count;
+    Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.username =:arg2");
+
+    query.setParameter("arg2", username);
+    List <Antrean> a = (List <Antrean>) query.getResultList();
+    return a.size();
+  }
+    
+    public int getAntreanByTanggal(String tanggal) {
+      Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.tanggalAntrean =:arg2");
+
+    query.setParameter("arg2", tanggal);
+    List <Antrean> a = (List <Antrean>) query.getResultList();
+    return a.size();
+    }
+    
+    public int checkEmpty() {
+      Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.tanggalAntrean =:arg1 and e.status =:arg2");
+      query.setParameter("arg1", globalDate);
+      query.setParameter("arg2", "mengantre");
+      List <Antrean> la = (List <Antrean>)query.getResultList();
+      return la.size();
+    }
+  
+  
+  
   
 
 

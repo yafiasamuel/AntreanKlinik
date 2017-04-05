@@ -31,7 +31,7 @@
     %>
     <h2 id="currentNomorAnntrean">
       <jsp:include page="/AntreanInfo" />
-      <c:out value="${message}"></c:out>
+      <c:out value="${currentAntrean}"></c:out>
     </h2>
 
 
@@ -39,6 +39,7 @@
       <input type="submit" id="next" name="next" value="Next">
       <input type="submit" id="skip" name="skip" value="Skip">
     </form>
+    
     <script>
       $('#next').click(function () {
         var jqxhr = $.ajax("AntreanManager?a=next")
