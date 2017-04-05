@@ -6,24 +6,23 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Antrean;
-import service.AntreanFacade;
+import model.Pasien;
+import service.PasienFacade;
 
 /**
  *
  * @author Dytra
  */
-public class RegistrasiAntrean extends HttpServlet {
+public class PasienManager extends HttpServlet {
 
   @EJB
-  AntreanFacade af;
+  PasienFacade pf;
 
   /**
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,30 +33,6 @@ public class RegistrasiAntrean extends HttpServlet {
    * @throws ServletException if a servlet-specific error occurs
    * @throws IOException if an I/O error occurs
    */
-  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    HttpSession session = request.getSession();
-    String username = session.getAttribute("username").toString();
-    try (PrintWriter out = response.getWriter()) {
-      /* TODO output your page here. You may use following sample code. */
-      out.println("<!DOCTYPE html>");
-      out.println("<html>");
-      out.println("<head>");
-      out.println("<title>Servlet RegistrasiAntrean</title>");
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>Terima Kasih Telah Mendaftar </h1>");
-      out.println(username);
-      out.println("</body>");
-      out.println("</html>");
-    }
-    String tanggalAntrean = request.getParameter("tanggalAntrean");
-    String keluhan = request.getParameter("keluhan");
-    int nomorAntrean = af.count() + 1;
-    Antrean antrean = new Antrean(username, nomorAntrean, tanggalAntrean, "mengantre", keluhan);
-    af.create(antrean);
-  }
 
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
   /**
@@ -71,7 +46,16 @@ public class RegistrasiAntrean extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    processRequest(request, response);
+    response.setContentType("text/html;charset=UTF-8");
+    if (request.getParameterMap().containsKey("d")) {
+      request.setAttribute("pesan", "sedang menghapus");
+
+      String url = request.getContextPath() + "/listPasien.jsp";
+      response.sendRedirect(url);
+    } else {
+      List<Pasien> la = pf.findAll();
+      request.setAttribute("ole", la);
+    }
   }
 
   /**
@@ -85,7 +69,7 @@ public class RegistrasiAntrean extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    processRequest(request, response);
+
   }
 
   /**
