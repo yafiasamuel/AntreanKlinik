@@ -25,13 +25,14 @@
   <jsp:include page="/DashboardPasienControl?u=${username}" />
   <body>
     <h1>Dashboard</h1>
-    <table id="infoBox">
+    <table id="infoBox" border="1">
       <tr>
         <th>Tanggal Mengantre</th>
         <th>Total Antrean</th>
         <th>Sedang Diperiksa</th>
         <th>Nomor Antrean</th>
         <th>Sisa Antrean</th>
+        <th>Status</th>
       </tr>
       <tr>
 
@@ -41,6 +42,7 @@
         <td id="nomorDiperiksa"><%= request.getAttribute("nomorDiperiksa") %></td>
         <td id="nomorAntrean"><%= request.getAttribute("nomorAntrean") %></td>
         <td id="sisaAntrean"><%= request.getAttribute("sisaAntrean") %></td>
+        <td id="status"><%= request.getAttribute("status") %></td>
 
       </tr>
     </table>
@@ -51,24 +53,30 @@
         console.log("hey");
         var jqxhr = $.ajax("api?u=${username}")
                 .done(function (text) {
-                  var antrean = text.split('#');
-                  var sisaAntrean = antrean[4];
-                  $('#sisaAntrean').text(sisaAntrean);
-                  $('#tanggalMengantre').text(antrean[1]);
-                  $('#totalAntrean').text(antrean[2]);
-                  $('#nomorDiperiksa').text(antrean[3]);
-                  $('#nomorAntrean').text(antrean[0]);
-                  console.log(text);
-                  if (sisaAntrean == 0) {
-                    $('#pesan').text("Giliran Anda mengantre!");
-                    console.log("sudah 0!");
-                  } else if (sisaAntrean <= 0) {
-                    $('#pesan').text("Anda sudah mengantre!");
-                    console.log("sudah selesai mengantre!");
-                    $('#infoBox').hide();
-                  }
-                   else {
-                    console.log("belum 0,sisaAntrean =" + sisaAntrean);
+                  if (text == "habis") {
+                     if($('#status').text()) {
+                       $('#infoBox').hide();
+                       $('#pesan').text("Anda telah selsai mengantre, Terimakasih");
+                     }
+                  } else {
+                    var antrean = text.split('#');
+                    var sisaAntrean = antrean[4];
+                    $('#sisaAntrean').text(sisaAntrean);
+                    $('#tanggalMengantre').text(antrean[1]);
+                    $('#totalAntrean').text(antrean[2]);
+                    $('#nomorDiperiksa').text(antrean[3]);
+                    $('#nomorAntrean').text(antrean[0]);
+                    console.log(text);
+                    if (sisaAntrean == 0) {
+                      $('#pesan').text("Giliran Anda mengantre!");
+                      console.log("sudah 0!");
+                    } else if (sisaAntrean < 0) {
+                      $('#pesan').text("Anda sudah mengantre!");
+                      console.log("sudah selesai mengantre!");
+                      $('#infoBox').hide();
+                    } else {
+                      console.log("belum 0,sisaAntrean =" + sisaAntrean);
+                    }
                   }
                 })
                 .fail(function () {

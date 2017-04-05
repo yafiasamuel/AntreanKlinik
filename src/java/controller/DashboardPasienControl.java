@@ -39,7 +39,7 @@ public class DashboardPasienControl extends HttpServlet {
         request.setAttribute("totalCurrentAntrean", totalCurrentAntrean);
         request.setAttribute("nomorDiperiksa", nomorDiperiksa);
         request.setAttribute("sisaAntrean", sisaAntrean);
-    
+        request.setAttribute("status", antre.getStatus());
   }
 
   /**

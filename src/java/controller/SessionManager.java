@@ -34,13 +34,27 @@ public class SessionManager extends HttpServlet {
     HttpSession session;
 
     session = request.getSession();
-    if(session.getAttribute("username") == null) {
+    if (session.getAttribute("username") == null) { //jika blum login
       response.sendRedirect("login.jsp");
+      try (PrintWriter out = response.getWriter()) {
+        out.print("<script>alert('belum login!');</script>");
+        out.println("<meta http-equiv=\"refresh\" content=\"0;url=http://localhost:8080/AntreanKlinik/login.jsp\">");
+      }
     } else {
-      request.setAttribute("username", session.getAttribute("username"));
+      if (request.getParameterMap().containsKey("admin")) { //jka membuka halaman admin
+        if (!session.getAttribute("username").equals("admin")) { //jka yg login bukan admin
+          try (PrintWriter out = response.getWriter()) {
+            out.println("<meta http-equiv=\"refresh\" content=\"0;url=http://localhost:8080/AntreanKlinik/lobbyPasien.jsp\">"); //redirect ke halaman lobby
+          }
+        }
+      } else {
+
+        request.setAttribute("username", session.getAttribute("username"));
+      }
     }
 
   }
+
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
   /**
    * Handles the HTTP <code>GET</code> method.
@@ -53,6 +67,7 @@ public class SessionManager extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
+
     processRequest(request, response);
   }
 

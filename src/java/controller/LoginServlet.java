@@ -57,10 +57,15 @@ public class LoginServlet extends HttpServlet {
       if (res == null) {
         out.println("it's null");
       } else {
-        if(res.getPassword().equals(request.getParameter("password"))) {
+        if (res.getPassword().equals(request.getParameter("password"))) {
           out.println("selamat datang");
-          out.println ("<meta http-equiv=\"refresh\" content=\"0;url=http://localhost:8080/AntreanKlinik/lobbyPasien.jsp\">");
-          
+          if (request.getParameter("username").equals("admin")) {
+            session.setAttribute("username", request.getParameter("username"));
+            out.println("<meta http-equiv=\"refresh\" content=\"0;url=http://localhost:8080/AntreanKlinik/antreanController.jsp\">");
+          } else {
+            out.println("<meta http-equiv=\"refresh\" content=\"0;url=http://localhost:8080/AntreanKlinik/lobbyPasien.jsp\">");
+          }
+
         } else {
           out.println("username atau password salah");
         }
@@ -70,7 +75,6 @@ public class LoginServlet extends HttpServlet {
       out.println("</body>");
       out.println("</html>");
     }
-
 
   }
 

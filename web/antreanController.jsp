@@ -16,39 +16,30 @@
   <body>
     <h1>Admin Panel!</h1>
     <%@ page import="javax.ejb.EJB, service.AntreanFacade, controller.api ,model.Antrean, java.util.ArrayList, java.util.List, javax.persistence.EntityManager, javax.persistence.Query, controller.AntreanInfo" %>
-    <%!
-     AntreanInfo ai = new AntreanInfo();
 
-    %>
-
-
-    <%
-
-//    Antrean currentAntrean = la.get(0);
-//      out.print(currentAntrean.getIdAntrean() + "#");
-      
-      out.println("weleh");
-    %>
     <h2 id="currentNomorAnntrean">
       <jsp:include page="/AntreanInfo" />
       <c:out value="${currentAntrean}"></c:out>
     </h2>
 
-
+    <jsp:include page="/SessionManager?admin=1" />
     <form action="AntreanManager" method="post">
       <input type="submit" id="next" name="next" value="Next">
       <input type="submit" id="skip" name="skip" value="Skip">
     </form>
-    
+
     <script>
       $('#next').click(function () {
         var jqxhr = $.ajax("AntreanManager?a=next")
                 .done(function (text) {
                   alert(text);
-                  var antrean = text.split('#');
-                  var nomorAntrean = antrean[2];
-                  $('#currentNomorAnntrean').text(nomorAntrean);
-                  
+                  if (text == "habis") {
+                    $('#currentNomorAnntrean').text("habis");
+                  } else {
+                    var antrean = text.split('#');
+                    var nomorAntrean = antrean[2];
+                    $('#currentNomorAnntrean').text(nomorAntrean);
+                  }
                 })
                 .fail(function () {
                   alert("error");
@@ -58,14 +49,17 @@
                 });
         return false;
       });
-      
+
       $('#skip').click(function () {
         var jqxhr = $.ajax("AntreanManager?a=skip")
                 .done(function (text) {
-                 var antrean = text.split('#');
-                 var nomorAntrean = antrean[2];
-                 $('#currentNomorAnntrean').text(nomorAntrean);
-                  
+                  if (text == "habis") {
+                    $('#currentNomorAnntrean').text("habis");
+                  } else {
+                    var antrean = text.split('#');
+                    var nomorAntrean = antrean[2];
+                    $('#currentNomorAnntrean').text(nomorAntrean);
+                  }
                 })
                 .fail(function () {
                   alert("error");

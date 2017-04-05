@@ -27,17 +27,19 @@ public class api extends HttpServlet {
   AntreanFacade af;
 
   List<Antrean> la;
-  
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
-    la = af.getCurrentAntrean();
-    Antrean currentAntrean = la.get(0);
 
     try (PrintWriter out = response.getWriter()) {
       if (request.getParameterMap().containsKey("u")) {
+        if(af.getCurrentAntrean().size() == 0) {
+          out.print("habis");
+        } else {
+        la = af.getCurrentAntrean();
+        Antrean currentAntrean = la.get(0);
         //ambil username pada get
         String getUser = request.getParameter("u");
         //ambil tanggal mengantre user sesuai username
@@ -52,22 +54,25 @@ public class api extends HttpServlet {
         out.print(tanggalMengantre + "#");
         out.print(totalCurrentAntrean + "#");
         out.print(nomorDiperiksa + "#");
-        out.print(sisaAntrean);
+        out.print(sisaAntrean + "#");
+        out.print(antre.getStatus());
+        
         //forward
         request.setAttribute("nomorAntrean", nomorAntrean);
         request.setAttribute("tanggalMengantre", tanggalMengantre);
         request.setAttribute("totalCurrentAntrean", totalCurrentAntrean);
         request.setAttribute("nomorDiperiksa", nomorDiperiksa);
         request.setAttribute("sisaAntrean", sisaAntrean);
+        }
 
       } else {
-        out.print(currentAntrean.getIdAntrean() + "#");
-        out.print(currentAntrean.getUsername() + "#");
-        out.print(currentAntrean.getNomorAntrean() + "#");
-        out.print(currentAntrean.getTanggalAntrean() + "#");
-        out.print(currentAntrean.getStatus() + "#");
-        out.print(currentAntrean.getKeluhan());
-        out.println();
+//        out.print(currentAntrean.getIdAntrean() + "#");
+//        out.print(currentAntrean.getUsername() + "#");
+//        out.print(currentAntrean.getNomorAntrean() + "#");
+//        out.print(currentAntrean.getTanggalAntrean() + "#");
+//        out.print(currentAntrean.getStatus() + "#");
+//        out.print(currentAntrean.getKeluhan());
+//        out.println();
       }
 
     }

@@ -40,12 +40,18 @@ public class AntreanInfo extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    Antrean antrean = (Antrean) af.getSingleCurrentAntrean();
+
     int count = af.checkEmpty();
-    if (count == 0) {
-      request.setAttribute("currentAntrean", "Habis");
+
+    if (count == 0) { //jka yang mengantre habis
+      if (af.getCurrentAntrean().size() == 1) { //jika antrean bertambah
+        request.setAttribute("currentAntrean", af.getCurrentAntrean().get(0).getNomorAntrean());
+      } else {
+        request.setAttribute("currentAntrean", "Habis");
+      }
     } else {
-      request.setAttribute("currentAntrean", count);
+      Antrean antrean = af.getSingleCurrentAntrean();
+      request.setAttribute("currentAntrean", antrean);
     }
   }
 

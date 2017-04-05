@@ -56,7 +56,11 @@ public class RegistrasiAntrean extends HttpServlet {
       } else {
         if(af.getAntreanByTanggal(tanggalAntrean) == 0) {
           status = "diperiksa";
-        } else {
+          
+        } else if(af.getCurrentAntrean().size() == 0) {
+          status = "diperiksa";
+        }
+        else {
           status = "mengantre";
         }
         int nomorAntrean = af.generateNomorAntrean(tanggalAntrean) + 1;

@@ -90,12 +90,12 @@ public abstract class AbstractFacade<T> {
     return query.getResultList();
   }
 
-  public Object getSingleCurrentAntrean() {
+  public Antrean getSingleCurrentAntrean() {
 
     Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.tanggalAntrean=:arg1 and e.status=:arg2");
     query.setParameter("arg1", globalDate);
     query.setParameter("arg2", "diperiksa");
-    return query.getSingleResult();
+    return (Antrean) query.getSingleResult();
   }
   
   public Antrean getCurrentAntreanByUsername(String user) {
