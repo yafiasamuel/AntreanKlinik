@@ -5,11 +5,11 @@
  */
 package controller;
 
-import com.sun.corba.se.impl.orbutil.ObjectWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,33 +25,30 @@ public class api extends HttpServlet {
 
   @EJB
   AntreanFacade af;
-  
-  List <Antrean> la;
+
+  List<Antrean> la;
+
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
-    
-    List <Antrean> la = af.getCurrentAntrean();
-    
-    //json
-    
+    la = af.getCurrentAntrean();
+    Antrean currentAntrean = la.get(0);
 
     try (PrintWriter out = response.getWriter()) {
-      /* TODO output your page here. You may use following sample code. */
-      out.println("<!DOCTYPE html>");
-      out.println("<html>");
-      out.println("<head>");
-      out.println("<title>Servlet api</title>");      
-      out.println("</head>");
-      out.println("<body>");
-      for(Antrean a : la) {
-        out.println(a.getTanggalAntrean() + "<br>");
-      }
-      out.println("<h1>Servlet api at " + request.getContextPath() + "</h1>");
-      out.println("</body>");
-      out.println("</html>");
+
+      out.print(currentAntrean.getIdAntrean() + "#");
+      out.print(currentAntrean.getUsername() + "#");
+      out.print(currentAntrean.getNomorAntrean() + "#");
+      out.print(currentAntrean.getTanggalAntrean() + "#");
+      out.print(currentAntrean.getStatus() + "#");
+      out.print(currentAntrean.getKeluhan());
+      out.println();
+
     }
+
   }
+
+
 
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
   /**
@@ -65,6 +62,8 @@ public class api extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
+//    request.setAttribute("result", "this is result");
+//    request.getRequestDispatcher("/antreanController.jsp");
     processRequest(request, response);
   }
 
@@ -91,5 +90,10 @@ public class api extends HttpServlet {
   public String getServletInfo() {
     return "Short description";
   }// </editor-fold>
+
+  public Antrean getCurrentIdAntrean() throws ServletException, IOException {
+    la = af.getCurrentAntrean();
+    return la.get(0);
+  }
 
 }
