@@ -46,7 +46,7 @@
           <td>${u.getNomorTelpon()}</td>
           <td>${u.getAlamat()}</td>
           <td>${u.getFoto()}</td>
-          <td><a href="/editPasien.jsp?e=${u.getUsername()}">Edit</td>
+          <td><a href="/AntreanKlinik/editPasien.jsp?e=${u.getUsername()}">Edit</td>
           <td><a href="/AntreanKlinik/PasienManager?d=${u.getUsername()}">Hapus</td>
         </tr>
 

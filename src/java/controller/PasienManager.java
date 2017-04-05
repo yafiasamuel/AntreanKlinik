@@ -6,6 +6,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -24,16 +25,6 @@ public class PasienManager extends HttpServlet {
   @EJB
   PasienFacade pf;
 
-  /**
-   * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-   * methods.
-   *
-   * @param request servlet request
-   * @param response servlet response
-   * @throws ServletException if a servlet-specific error occurs
-   * @throws IOException if an I/O error occurs
-   */
-
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
   /**
    * Handles the HTTP <code>GET</code> method.
@@ -47,11 +38,23 @@ public class PasienManager extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
-    if (request.getParameterMap().containsKey("d")) {
-      request.setAttribute("pesan", "sedang menghapus");
+    if (request.getParameterMap().containsKey("e")) {
+      
+      
+      String username = request.getParameter("e");
+      Pasien p = pf.find(username);
+      request.setAttribute("p", p);
+    }
+    else if(request.getParameterMap().containsKey("d")) {
+      
 
+      response.setContentType("text/html;charset=UTF-8");
+      try (PrintWriter out = response.getWriter()) {
+        String username = request.getParameter("d");
+        out.print(username);
+      }
       String url = request.getContextPath() + "/listPasien.jsp";
-      response.sendRedirect(url);
+//      response.sendRedirect(url);
     } else {
       List<Pasien> la = pf.findAll();
       request.setAttribute("ole", la);
