@@ -65,7 +65,7 @@ public class RUDantrean extends HttpServlet {
         af.remove(a);
       
       
-      response.sendRedirect("listAntrean.jsp");
+      response.sendRedirect("adminAntrean.jsp");
     } else {
       List<Antrean> la = af.findAll();
       request.setAttribute("ole", la);

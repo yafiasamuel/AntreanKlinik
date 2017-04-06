@@ -37,7 +37,9 @@ public class api extends HttpServlet {
       //ambil username pada get
       String getUser = request.getParameter("u");
       if (request.getParameterMap().containsKey("u")) {
+
         if (af.getCurrentAntrean().size() == 0) {
+
           Antrean antre = af.getAntreanByUsername(getUser);
           int nomorAntrean = antre.getNomorAntrean();
           String tanggalMengantre = antre.getTanggalAntrean();
@@ -49,7 +51,9 @@ public class api extends HttpServlet {
           out.print("-" + "#");
           out.print(antre.getStatus());
         } else {
+
           la = af.getCurrentAntrean();
+
           Antrean currentAntrean = la.get(0);
 
           //ambil tanggal mengantre user sesuai username
@@ -68,14 +72,15 @@ public class api extends HttpServlet {
           out.print(antre.getStatus());
 
           //forward
-          request.setAttribute("nomorAntrean", nomorAntrean);
-          request.setAttribute("tanggalMengantre", tanggalMengantre);
-          request.setAttribute("totalCurrentAntrean", totalCurrentAntrean);
-          request.setAttribute("nomorDiperiksa", nomorDiperiksa);
-          request.setAttribute("sisaAntrean", sisaAntrean);
+//          request.setAttribute("nomorAntrean", nomorAntrean);
+//          request.setAttribute("tanggalMengantre", tanggalMengantre);
+//          request.setAttribute("totalCurrentAntrean", totalCurrentAntrean);
+//          request.setAttribute("nomorDiperiksa", nomorDiperiksa);
+//          request.setAttribute("sisaAntrean", sisaAntrean);
         }
 
       } else {
+
 //        out.print(currentAntrean.getIdAntrean() + "#");
 //        out.print(currentAntrean.getUsername() + "#");
 //        out.print(currentAntrean.getNomorAntrean() + "#");

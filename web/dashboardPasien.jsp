@@ -50,7 +50,7 @@
             </div>
             <div class="ui column green segment">
               <h2><p id="nomorDiperiksa"><%= request.getAttribute("nomorDiperiksa") %></p></h2>
-              <em>Diperiksa</em>
+              <em>Sedang Diperiksa</em>
             </div>
           </div>
         </div>
@@ -75,7 +75,7 @@
                 console.log("hey");
                 var jqxhr = $.ajax("api?u=${username}")
                         .done(function (text) {
-                          alert(text);
+//                          alert(text);
                           if ($('#status').text() == 'selesai') {
                             $('#infoBox').hide();
                             $('#pesan').text("Anda telah selsai mengantre, Terimakasih");

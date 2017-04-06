@@ -99,9 +99,10 @@ public abstract class AbstractFacade<T> {
   }
   
   public Antrean getCurrentAntreanByUsername(String user) {
-    Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.username=:arg1 and e.status=:arg2");
+    Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.username=:arg1 and (e.status=:arg2 or e.status=:arg3)");
     query.setParameter("arg1", user);
     query.setParameter("arg2", "diperiksa");
+    query.setParameter("arg3", "mengantre");
     return (Antrean) query.getSingleResult();
   }
   

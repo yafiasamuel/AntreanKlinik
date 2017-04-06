@@ -70,7 +70,7 @@ public class RegistrasiAntrean extends HttpServlet {
         out.println("<h1>Terima Kasih Telah Mendaftar </h1>");
         out.println("<a href='dashboardPasien.jsp'>Ke dashboard</a>");
       }
-      out.println(username);
+
       out.println("</body>");
       out.println("</html>");
     }

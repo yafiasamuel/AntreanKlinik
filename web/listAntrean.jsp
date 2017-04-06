@@ -5,7 +5,7 @@
     <h1>Antrean List</h1>
     <jsp:include page="/RUDantrean" />
 
-    <table class="ui celled table" border="1">
+    <table class="ui celled table" >
       <thead>
       <tr>
         <th>ID Antrean</th>
