@@ -34,35 +34,45 @@ public class api extends HttpServlet {
     response.setContentType("text/html;charset=UTF-8");
 
     try (PrintWriter out = response.getWriter()) {
+      //ambil username pada get
+      String getUser = request.getParameter("u");
       if (request.getParameterMap().containsKey("u")) {
-        if(af.getCurrentAntrean().size() == 0) {
-          out.print("habis");
+        if (af.getCurrentAntrean().size() == 0) {
+          Antrean antre = af.getAntreanByUsername(getUser);
+          int nomorAntrean = antre.getNomorAntrean();
+          String tanggalMengantre = antre.getTanggalAntrean();
+          int totalCurrentAntrean = af.getTotalCurrentAntrean(tanggalMengantre);
+          out.print(nomorAntrean + "#");
+          out.print(tanggalMengantre + "#");
+          out.print(totalCurrentAntrean + "#");
+          out.print("-" + "#");
+          out.print("-" + "#");
+          out.print(antre.getStatus());
         } else {
-        la = af.getCurrentAntrean();
-        Antrean currentAntrean = la.get(0);
-        //ambil username pada get
-        String getUser = request.getParameter("u");
-        //ambil tanggal mengantre user sesuai username
-        Antrean antre = af.getCurrentAntreanByUsername(getUser);
-        String tanggalMengantre = antre.getTanggalAntrean();
-        int nomorAntrean = antre.getNomorAntrean();
-        int totalCurrentAntrean = af.getTotalCurrentAntrean(tanggalMengantre);
-        int nomorDiperiksa = af.getNomorDiperiksa(tanggalMengantre);
-        int sisaAntrean = nomorAntrean - nomorDiperiksa;
-        Antrean pasien = (Antrean) af.getCurrentAntreanByUsername(getUser);
-        out.print(nomorAntrean + "#");
-        out.print(tanggalMengantre + "#");
-        out.print(totalCurrentAntrean + "#");
-        out.print(nomorDiperiksa + "#");
-        out.print(sisaAntrean + "#");
-        out.print(antre.getStatus());
-        
-        //forward
-        request.setAttribute("nomorAntrean", nomorAntrean);
-        request.setAttribute("tanggalMengantre", tanggalMengantre);
-        request.setAttribute("totalCurrentAntrean", totalCurrentAntrean);
-        request.setAttribute("nomorDiperiksa", nomorDiperiksa);
-        request.setAttribute("sisaAntrean", sisaAntrean);
+          la = af.getCurrentAntrean();
+          Antrean currentAntrean = la.get(0);
+
+          //ambil tanggal mengantre user sesuai username
+          Antrean antre = af.getCurrentAntreanByUsername(getUser);
+          String tanggalMengantre = antre.getTanggalAntrean();
+          int nomorAntrean = antre.getNomorAntrean();
+          int totalCurrentAntrean = af.getTotalCurrentAntrean(tanggalMengantre);
+          int nomorDiperiksa = af.getNomorDiperiksa(tanggalMengantre);
+          int sisaAntrean = nomorAntrean - nomorDiperiksa;
+          Antrean pasien = (Antrean) af.getCurrentAntreanByUsername(getUser);
+          out.print(nomorAntrean + "#");
+          out.print(tanggalMengantre + "#");
+          out.print(totalCurrentAntrean + "#");
+          out.print(nomorDiperiksa + "#");
+          out.print(sisaAntrean + "#");
+          out.print(antre.getStatus());
+
+          //forward
+          request.setAttribute("nomorAntrean", nomorAntrean);
+          request.setAttribute("tanggalMengantre", tanggalMengantre);
+          request.setAttribute("totalCurrentAntrean", totalCurrentAntrean);
+          request.setAttribute("nomorDiperiksa", nomorDiperiksa);
+          request.setAttribute("sisaAntrean", sisaAntrean);
         }
 
       } else {

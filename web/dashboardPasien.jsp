@@ -50,44 +50,45 @@
     <a href="Logout">Logout</a>
     <script>
       function LoopForever() {
-        console.log("hey");
-        var jqxhr = $.ajax("api?u=${username}")
-                .done(function (text) {
-                  if (text == "habis") {
-                     if($('#status').text()) {
-                       $('#infoBox').hide();
-                       $('#pesan').text("Anda telah selsai mengantre, Terimakasih");
-                     }
-                  } else {
-                    var antrean = text.split('#');
-                    var sisaAntrean = antrean[4];
-                    $('#sisaAntrean').text(sisaAntrean);
-                    $('#tanggalMengantre').text(antrean[1]);
-                    $('#totalAntrean').text(antrean[2]);
-                    $('#nomorDiperiksa').text(antrean[3]);
-                    $('#nomorAntrean').text(antrean[0]);
-                    console.log(text);
-                    if (sisaAntrean == 0) {
-                      $('#pesan').text("Giliran Anda mengantre!");
-                      console.log("sudah 0!");
-                    } else if (sisaAntrean < 0) {
-                      $('#pesan').text("Anda sudah mengantre!");
-                      console.log("sudah selesai mengantre!");
-                      $('#infoBox').hide();
-                    } else {
-                      console.log("belum 0,sisaAntrean =" + sisaAntrean);
-                    }
-                  }
-                })
-                .fail(function () {
+      console.log("hey");
+      var jqxhr = $.ajax("api?u=${username}")
+              .done(function (text) {
+
+              if ($('#status').text() == 'selesai') {
+              $('#infoBox').hide();
+              $('#pesan').text("Anda telah selsai mengantre, Terimakasih");
+              } else {
+              var antrean = text.split('#');
+              var sisaAntrean = antrean[4];
+              $('#sisaAntrean').text(sisaAntrean);
+              $('#tanggalMengantre').text(antrean[1]);
+              $('#totalAntrean').text(antrean[2]);
+              $('#nomorDiperiksa').text(antrean[3]);
+              $('#nomorAntrean').text(antrean[0]);
+              $('#status').text(antrean[5]);
+              console.log(text);
+              if (sisaAntrean == 0) {
+              $('#pesan').text("Giliran Anda mengantre!");
+              console.log("sudah 0!");
+              } else if (sisaAntrean < 0) {
+              $('#pesan').text("Anda sudah mengantre!");
+              console.log("sudah selesai mengantre!");
+              $('#infoBox').hide();
+              }
+              else {
+              console.log("belum 0,sisaAntrean =" + sisaAntrean);
+              }
+              }
+              })
+              .fail(function () {
 //                  alert("error");
-                })
-                .always(function () {
-                  console.log("success ajax request");
-                });
+              })
+              .always(function () {
+              console.log("success ajax request");
+              });
       }
       var interval = self.setInterval(function () {
-        LoopForever()
+      LoopForever()
       }, 1000);
     </script>
   </body>

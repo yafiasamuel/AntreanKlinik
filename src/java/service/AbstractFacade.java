@@ -99,8 +99,16 @@ public abstract class AbstractFacade<T> {
   }
   
   public Antrean getCurrentAntreanByUsername(String user) {
+    Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.username=:arg1 and e.status=:arg2");
+    query.setParameter("arg1", user);
+    query.setParameter("arg2", "diperiksa");
+    return (Antrean) query.getSingleResult();
+  }
+  
+    public Antrean getAntreanByUsername(String user) {
     Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.username=:arg1");
     query.setParameter("arg1", user);
+
     return (Antrean) query.getSingleResult();
   }
   
@@ -148,9 +156,11 @@ public abstract class AbstractFacade<T> {
   
     public int getNumberOfAntreanByUser(String username) {
     int count;
-    Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.username =:arg2");
+    Query query = getEntityManager().createQuery("SELECT e FROM Antrean e where e.username =:arg1 and (e.status =:arg2 or e.status =:arg3)");
 
-    query.setParameter("arg2", username);
+    query.setParameter("arg1", username);
+    query.setParameter("arg2", "diperiksa");
+    query.setParameter("arg3", "mengantre");
     List <Antrean> a = (List <Antrean>) query.getResultList();
     return a.size();
   }

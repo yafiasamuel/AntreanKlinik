@@ -72,7 +72,11 @@ public class AntreanManager extends HttpServlet {
 
       } else if (a.equals("skip")) {
         if (af.checkEmpty() == 0) {
-          out.print("habis");
+          Antrean antrean = (Antrean) af.getSingleCurrentAntrean();
+          antrean.setStatus("skip");
+          //ubah status ke skip
+          af.edit(antrean);
+
         } else {
           Antrean antrean = (Antrean) af.getSingleCurrentAntrean();
           antrean.setStatus("skip");
