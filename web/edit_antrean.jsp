@@ -24,11 +24,11 @@
       <input type="text" name="nomor" value="${p.getNomorAntrean()}" ><br >
       <input type="date" name="tanggal_antrean" value="${p.getTanggalAntrean()}"><br >
       <select name="status" value="${p.getStatus()}">
-        <option name="status" value="Mengantri" >Mengantri</option>
-        <option name="status" value="Diperiksa">Diperiksa</option>
-        <option name="status" value="Skip">Skip</option>
-        <option name="status" value="Batal">Batal</option>
-        <option name="status" value="Batal">Selesai</option>
+        <option name="status" value="mengantre" >Mengantri</option>
+        <option name="status" value="diperiksa">Diperiksa</option>
+        <option name="status" value="skip">Skip</option>
+        <option name="status" value="batal">Batal</option>
+        <option name="status" value="selesai">Selesai</option>
       </select>
       <br >
       <textarea name="keluhan" placeholder="keluhan" value="${p.getKeluhan()}">${p.getKeluhan()}</textarea><br >

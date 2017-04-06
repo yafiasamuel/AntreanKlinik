@@ -34,7 +34,7 @@
       $('#next').click(function () {
         var jqxhr = $.ajax("AntreanManager?a=next")
                 .done(function (text) {
-                  alert(text);
+                  //alert(text);
                   if (text == "habis") {
                     $('#currentNomorAnntrean').text("habis");
                   } else {
