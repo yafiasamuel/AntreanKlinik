@@ -11,9 +11,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Daftar Antrean</title>
     <link rel="stylesheet" href="assets/semantic.min.css" />
-    <link rel="stylesheet" href="assets/main.css" />
+
   </head>
-  <body>
+  <body style="background: #eceaea;margin-top:3em">
     <div class="main ui stackable centered page grid">
       <form action="RegistrasiAntrean" method="post" class="ui form column eight wide segment">
         <h1>Daftar Antrean</h1>
