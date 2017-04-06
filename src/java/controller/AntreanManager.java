@@ -71,27 +71,24 @@ public class AntreanManager extends HttpServlet {
         }
 
       } else if (a.equals("skip")) {
-        if (af.checkEmpty() == 0) {
-          Antrean antrean = (Antrean) af.getSingleCurrentAntrean();
-          antrean.setStatus("skip");
-          //ubah status ke skip
-          af.edit(antrean);
-
+        beforeEdit(username);
+        if (af.checkEmpty() == 0) { //jika yg mengantre habis
+          out.print("habis");
         } else {
-          Antrean antrean = (Antrean) af.getSingleCurrentAntrean();
-          antrean.setStatus("skip");
-          //ubah status ke skip
-          af.edit(antrean);
-          //ubah antrean selanjutnya mejadi diperiksa
-          afterEdit(username);
-          //tampilkan antrean sekarang
-          antrean = (Antrean) af.getSingleCurrentAntrean();
-          out.print(antrean.getIdAntrean() + "#");
-          out.print(antrean.getUsername() + "#");
-          out.print(antrean.getNomorAntrean() + "#");
-          out.print(antrean.getTanggalAntrean() + "#");
-          out.print(antrean.getStatus() + "#");
-          out.print(antrean.getKeluhan());
+          Antrean ak = af.getAntreanByUsername(username);
+          ak.setStatus("skip");
+          af.edit(ak);
+          Antrean al = af.getAllCurrentAntrean().get(0);
+          al.setStatus("diperiksa");
+          af.edit(al);
+          //new data 
+          Antrean ank = af.getAntreanByUsername(username);
+          out.print(ank.getIdAntrean() + "#");
+          out.print(ank.getUsername() + "#");
+          out.print(ank.getNomorAntrean() + "#");
+          out.print(ank.getTanggalAntrean() + "#");
+          out.print(ank.getStatus() + "#");
+          out.print(ank.getKeluhan());
         }
       }
     }
@@ -141,6 +138,26 @@ public class AntreanManager extends HttpServlet {
     editAntrean.setTanggalAntrean(currentAntrean.getTanggalAntrean());
     editAntrean.setUsername(currentAntrean.getUsername());
     editAntrean.setStatus("selesai");
+
+//    begin edit
+    af.edit(editAntrean);
+    return (editAntrean.getIdAntrean());
+  }
+
+  private int beforeEditSkip(String username) {
+
+    //getcurrent antrean from api
+    la = af.getCurrentAntrean();
+    Antrean currentAntrean = la.get(0);
+    Integer idAntrean = currentAntrean.getIdAntrean();
+    //object edit
+    Antrean editAntrean = new Antrean();
+    editAntrean.setIdAntrean(idAntrean);
+    editAntrean.setKeluhan(currentAntrean.getKeluhan());
+    editAntrean.setNomorAntrean(currentAntrean.getNomorAntrean());
+    editAntrean.setTanggalAntrean(currentAntrean.getTanggalAntrean());
+    editAntrean.setUsername(currentAntrean.getUsername());
+    editAntrean.setStatus("skip");
 
 //    begin edit
     af.edit(editAntrean);
