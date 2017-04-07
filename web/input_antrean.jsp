@@ -16,12 +16,12 @@
             <!--<input type="text" name="idantrian" placeholder="ID Antrian" ><br >-->
             <input type="text" name="username" placeholder="Username" ><br >
             <input type="text" name="nomor" placeholder="Nomor Antrian" ><br >
-            <input type="date" name="tgl" ><br >
+            <input type="date" placaholder="tanggal" name="tgl" ><br >
             <select name="status">
-                <option name="status" value="Mengantri">Mengantri</option>
-                <option name="status" value="Diperiksa">Diperiksa</option>
-                <option name="status" value="Skip">Skip</option>
-                <option name="status" value="Batal">Batal</option>
+                <option name="status" value="mengantre">Mengantri</option>
+                <option name="status" value="diperiksa">Diperiksa</option>
+                <option name="status" value="skip">Skip</option>
+                <option name="status" value="batal">Batal</option>
             </select>
                 <br >
             <textarea name="keluhan" placeholder="keluhan" ></textarea><br >

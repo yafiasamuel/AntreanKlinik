@@ -21,77 +21,77 @@ import service.PasienFacade;
  */
 public class CRUDpasien extends HttpServlet {
 
-    @EJB
-    private PasienFacade pf;
+  @EJB
+  private PasienFacade pf;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            String nama = request.getParameter("nama");
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String tempatLahir = request.getParameter("tempatlahir");
-            String tanggalLahir = request.getParameter("tanggallahir");
-            String jenisKelamin = request.getParameter("jeniskelamin");
-            String status = request.getParameter("status");
-            String pekerjaan = request.getParameter("pekerjaan");
-            String nomorTelepon = request.getParameter("nomortelp");
-            String alamat = request.getParameter("alamat");
-            String foto = request.getParameter("foto");
-            Pasien pasien = new Pasien(username, nama, password, tempatLahir, tanggalLahir, jenisKelamin, status, pekerjaan, nomorTelepon, alamat, foto);
-            pf.create(pasien);
-            out.println(nama + username + password + tempatLahir + tanggalLahir + jenisKelamin + status + pekerjaan + nomorTelepon + alamat + foto);
-        }
-    }
+  /**
+   * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+   * methods.
+   *
+   * @param request servlet request
+   * @param response servlet response
+   * @throws ServletException if a servlet-specific error occurs
+   * @throws IOException if an I/O error occurs
+   */
+  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException {
+    response.setContentType("text/html;charset=UTF-8");
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+    /* TODO output your page here. You may use following sample code. */
+    String nama = request.getParameter("nama");
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
+    String tempatLahir = request.getParameter("tempatlahir");
+    String tanggalLahir = request.getParameter("tanggallahir");
+    String jenisKelamin = request.getParameter("jeniskelamin");
+    String status = request.getParameter("status");
+    String pekerjaan = request.getParameter("pekerjaan");
+    String nomorTelepon = request.getParameter("nomortelp");
+    String alamat = request.getParameter("alamat");
+    String foto = request.getParameter("foto");
+    Pasien pasien = new Pasien(username, nama, password, tempatLahir, tanggalLahir, jenisKelamin, status, pekerjaan, nomorTelepon, alamat, foto);
+    pf.create(pasien);
+    response.sendRedirect("admin.jsp");
+       
+  }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+  // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+  /**
+   * Handles the HTTP <code>GET</code> method.
+   *
+   * @param request servlet request
+   * @param response servlet response
+   * @throws ServletException if a servlet-specific error occurs
+   * @throws IOException if an I/O error occurs
+   */
+  @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException {
+    processRequest(request, response);
+  }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+  /**
+   * Handles the HTTP <code>POST</code> method.
+   *
+   * @param request servlet request
+   * @param response servlet response
+   * @throws ServletException if a servlet-specific error occurs
+   * @throws IOException if an I/O error occurs
+   */
+  @Override
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException {
+    processRequest(request, response);
+  }
+
+  /**
+   * Returns a short description of the servlet.
+   *
+   * @return a String containing servlet description
+   */
+  @Override
+  public String getServletInfo() {
+    return "Short description";
+  }// </editor-fold>
 
 }

@@ -1,23 +1,12 @@
-<%-- 
-    Document   : listAntrean
-    Created on : Apr 5, 2017, 10:51:21 AM
-    Author     : Yafia
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="model.Antrean, java.util.List" %>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
+
     <h1>Antrean List</h1>
     <jsp:include page="/RUDantrean" />
 
-    <table border="1">
+    <table class="ui celled table" >
+      <thead>
       <tr>
         <th>ID Antrean</th>
         <th>Username</th>
@@ -27,8 +16,9 @@
         <th>Keluhan</th>
         <th colspan="2">Action</th>
       </tr>
-
+      </thead>
       <c:forEach var="u" items="<%= request.getAttribute("ole") %>">
+        <tbody>
         <tr>
           <td>${u.getIdAntrean()}</td>
           <td>${u.getUsername()}</td>
@@ -36,13 +26,12 @@
           <td>${u.getTanggalAntrean()}</td>
           <td>${u.getStatus()}</td>
           <td>${u.getKeluhan()}</td>
-          <td><a href="/AntreanKlinik/edit_antrean.jsp?e=${u.getIdAntrean()}">Edit</td>
-          <td><a href="/AntreanKlinik/RUDantrean?d=${u.getIdAntrean()}">Hapus</td>
+          <td><a class="ui blue button" href="/AntreanKlinik/edit_antrean.jsp?e=${u.getIdAntrean()}"><i class="edit icon"></i></td>
+          <td><a class="ui red button" href="/AntreanKlinik/RUDantrean?d=${u.getIdAntrean()}"><i class="remove icon"></i></td>
+          
         </tr>
-
+      </tbody>
       </c:forEach>
     </table>
-    <a href="input_antrean.jsp">Tambah Pasien</a>
-    <%= request.getAttribute("pesan") %>
-    </body>
-</html>
+    <a href="input_antrean.jsp" class="ui green button"><i class="plus icon"></i>Tambah Antrean</a>
+

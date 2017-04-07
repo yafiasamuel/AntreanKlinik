@@ -47,11 +47,12 @@ public class AntreanInfo extends HttpServlet {
       if (af.getCurrentAntrean().size() == 1) { //jika antrean bertambah
         request.setAttribute("currentAntrean", af.getCurrentAntrean().get(0).getNomorAntrean());
       } else {
+        
         request.setAttribute("currentAntrean", "Habis");
       }
     } else {
       Antrean antrean = af.getSingleCurrentAntrean();
-      request.setAttribute("currentAntrean", antrean);
+      request.setAttribute("currentAntrean", antrean.getNomorAntrean());
     }
   }
 

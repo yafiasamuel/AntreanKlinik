@@ -52,7 +52,8 @@ public class RegistrasiAntrean extends HttpServlet {
       out.println("<body>");
       //jika sudah mendaftar
       if (af.getNumberOfAntreanByUser(username) >= 1) {
-        out.println("<h1>Anda telah mendaftar!</h2>");
+        out.println("<h1>Anda sudah dalam antrean!</h2>");
+        out.println("<a href='lobbyPasien.jsp'>Ke lobby</a>");
       } else {
         if(af.getAntreanByTanggal(tanggalAntrean) == 0) {
           status = "diperiksa";
@@ -67,8 +68,9 @@ public class RegistrasiAntrean extends HttpServlet {
         Antrean antrean = new Antrean(username, nomorAntrean, tanggalAntrean, status, keluhan);
         af.create(antrean);
         out.println("<h1>Terima Kasih Telah Mendaftar </h1>");
+        out.println("<a href='dashboardPasien.jsp'>Ke dashboard</a>");
       }
-      out.println(username);
+
       out.println("</body>");
       out.println("</html>");
     }

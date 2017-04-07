@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
           out.println("selamat datang");
           if (request.getParameter("username").equals("admin")) {
             session.setAttribute("username", request.getParameter("username"));
-            out.println("<meta http-equiv=\"refresh\" content=\"0;url=http://localhost:8080/AntreanKlinik/antreanController.jsp\">");
+            out.println("<meta http-equiv=\"refresh\" content=\"0;url=http://localhost:8080/AntreanKlinik/admin.jsp\">");
           } else {
             out.println("<meta http-equiv=\"refresh\" content=\"0;url=http://localhost:8080/AntreanKlinik/lobbyPasien.jsp\">");
           }

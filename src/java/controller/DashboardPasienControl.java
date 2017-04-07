@@ -25,13 +25,13 @@ public class DashboardPasienControl extends HttpServlet {
     //ambil username pada get
         String getUser = request.getParameter("u");
         //ambil tanggal mengantre user sesuai username
-        Antrean antre = af.getCurrentAntreanByUsername(getUser);
+        Antrean antre = af.getAntreanByUsername(getUser);
         String tanggalMengantre = antre.getTanggalAntrean();
         int nomorAntrean = antre.getNomorAntrean();
         int totalCurrentAntrean = af.getTotalCurrentAntrean(tanggalMengantre);
         int nomorDiperiksa = af.getNomorDiperiksa(tanggalMengantre);
         int sisaAntrean = nomorAntrean - nomorDiperiksa;
-        Antrean pasien = (Antrean) af.getCurrentAntreanByUsername(getUser);
+        Antrean pasien = (Antrean) af.getAntreanByUsername(getUser);
 
         //forward
         request.setAttribute("nomorAntrean", nomorAntrean);
@@ -62,7 +62,7 @@ public class DashboardPasienControl extends HttpServlet {
         int totalCurrentAntrean = af.getTotalCurrentAntrean(tanggalMengantre);
         int nomorDiperiksa = af.getNomorDiperiksa(tanggalMengantre);
         int sisaAntrean = nomorAntrean - nomorDiperiksa;
-        Antrean pasien = (Antrean) af.getCurrentAntreanByUsername(getUser);
+
         out.print(nomorAntrean + "#");
         out.print(tanggalMengantre + "#");
         out.print(totalCurrentAntrean + "#");

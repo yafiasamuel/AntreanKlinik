@@ -26,94 +26,87 @@ public class RUDantrean extends HttpServlet {
 
   @EJB
   AntreanFacade af;
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-   
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        if (request.getParameterMap().containsKey("e")) {
-            String id_antrean = request.getParameter("e");
-            Integer id = Integer.parseInt(id_antrean);
-            Antrean p = af.find(id);
-            request.setAttribute("p", p);
-        } else if (request.getParameterMap().containsKey("d")) {
 
-            response.setContentType("text/html;charset=UTF-8");
-            try (PrintWriter out = response.getWriter()) {
-                String id_antrean = request.getParameter("d");
-                Integer id = Integer.parseInt(id_antrean);
-                Antrean a = af.find(id);
-                af.remove(a);
-            }
-            String url = request.getContextPath() + "/listAntrean.jsp";
-//      response.sendRedirect(url);
-        } else {
-            List<Antrean> la = af.findAll();
-            request.setAttribute("ole", la);
-        }
-    }
+  /**
+   * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+   * methods.
+   *
+   * @param request servlet request
+   * @param response servlet response
+   * @throws ServletException if a servlet-specific error occurs
+   * @throws IOException if an I/O error occurs
+   */
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        String id_antrean = request.getParameter("id");
+  // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+  /**
+   * Handles the HTTP <code>GET</code> method.
+   *
+   * @param request servlet request
+   * @param response servlet response
+   * @throws ServletException if a servlet-specific error occurs
+   * @throws IOException if an I/O error occurs
+   */
+  @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException {
+    response.setContentType("text/html;charset=UTF-8");
+    if (request.getParameterMap().containsKey("e")) {
+      String id_antrean = request.getParameter("e");
+      Integer id = Integer.parseInt(id_antrean);
+      Antrean p = af.find(id);
+      request.setAttribute("p", p);
+    } else if (request.getParameterMap().containsKey("d")) {
+
+      response.setContentType("text/html;charset=UTF-8");
+      
+        String id_antrean = request.getParameter("d");
         Integer id = Integer.parseInt(id_antrean);
-        String username = request.getParameter("username");
-        String nomor_antrean = request.getParameter("nomor");
-        int nomor = Integer.parseInt(nomor_antrean);
-        String tanggal_antrean = request.getParameter("tanggal_antrean");
-        String status = request.getParameter("status");
-        String keluhan = request.getParameter("keluhan");
-        
-        Antrean antrean = new Antrean(id,username, nomor, tanggal_antrean, status, keluhan);
-        
-        af.edit(antrean);
-
-        try (PrintWriter out = response.getWriter()) {
-            out.println(id);
-            out.println(username);
-            out.println(nomor);
-            out.println(tanggal_antrean);
-            out.println(status);
-            out.println(keluhan);
-        }
+        Antrean a = af.find(id);
+        af.remove(a);
+      
+      
+      response.sendRedirect("adminAntrean.jsp");
+    } else {
+      List<Antrean> la = af.findAll();
+      request.setAttribute("ole", la);
     }
+  }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+  /**
+   * Handles the HTTP <code>POST</code> method.
+   *
+   * @param request servlet request
+   * @param response servlet response
+   * @throws ServletException if a servlet-specific error occurs
+   * @throws IOException if an I/O error occurs
+   */
+  @Override
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException {
+    String id_antrean = request.getParameter("id");
+    Integer id = Integer.parseInt(id_antrean);
+    String username = request.getParameter("username");
+    String nomor_antrean = request.getParameter("nomor");
+    int nomor = Integer.parseInt(nomor_antrean);
+    String tanggal_antrean = request.getParameter("tanggal_antrean");
+    String status = request.getParameter("status");
+    String keluhan = request.getParameter("keluhan");
 
+    Antrean antrean = new Antrean(id, username, nomor, tanggal_antrean, status, keluhan);
+
+    af.edit(antrean);
+
+    response.sendRedirect("adminAntrean.jsp");
+  }
+
+  /**
+   * Returns a short description of the servlet.
+   *
+   * @return a String containing servlet description
+   */
+  @Override
+  public String getServletInfo() {
+    return "Short description";
+  }// </editor-fold>
 
 }
