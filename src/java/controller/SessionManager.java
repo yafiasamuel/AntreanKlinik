@@ -7,23 +7,17 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Antrean;
-import service.AntreanFacade;
 
 /**
  *
  * @author Dytra
  */
-public class RegistrasiAntrean extends HttpServlet {
-
-  @EJB
-  AntreanFacade af;
+public class SessionManager extends HttpServlet {
 
   /**
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,40 +31,26 @@ public class RegistrasiAntrean extends HttpServlet {
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
-    HttpSession session = request.getSession();
-    String username = session.getAttribute("username").toString();
-    String status = "";
-    try (PrintWriter out = response.getWriter()) {
-      
-      String tanggalAntrean = request.getParameter("tanggalAntrean");
-      String keluhan = request.getParameter("keluhan");
-      out.println("<!DOCTYPE html>");
-      out.println("<html>");
-      out.println("<head>");
-      out.println("<title>Servlet RegistrasiAntrean</title>");
-      out.println("</head>");
-      out.println("<body>");
-      //jika sudah mendaftar
-      if (af.getNumberOfAntreanByUser(username) >= 1) {
-        out.println("<h1>Anda telah mendaftar!</h2>");
-      } else {
-        if(af.getAntreanByTanggal(tanggalAntrean) == 0) {
-          status = "diperiksa";
-          
-        } else if(af.getCurrentAntrean().size() == 0) {
-          status = "diperiksa";
-        }
-        else {
-          status = "mengantre";
-        }
-        int nomorAntrean = af.generateNomorAntrean(tanggalAntrean) + 1;
-        Antrean antrean = new Antrean(username, nomorAntrean, tanggalAntrean, status, keluhan);
-        af.create(antrean);
-        out.println("<h1>Terima Kasih Telah Mendaftar </h1>");
+    HttpSession session;
+
+    session = request.getSession();
+    if (session.getAttribute("username") == null) { //jika blum login
+      response.sendRedirect("login.jsp");
+      try (PrintWriter out = response.getWriter()) {
+        out.print("<script>alert('belum login!');</script>");
+        out.println("<meta http-equiv=\"refresh\" content=\"0;url=http://localhost:8080/AntreanKlinik/login.jsp\">");
       }
-      out.println(username);
-      out.println("</body>");
-      out.println("</html>");
+    } else {
+      if (request.getParameterMap().containsKey("admin")) { //jka membuka halaman admin
+        if (!session.getAttribute("username").equals("admin")) { //jka yg login bukan admin
+          try (PrintWriter out = response.getWriter()) {
+            out.println("<meta http-equiv=\"refresh\" content=\"0;url=http://localhost:8080/AntreanKlinik/lobbyPasien.jsp\">"); //redirect ke halaman lobby
+          }
+        }
+      } else {
+
+        request.setAttribute("username", session.getAttribute("username"));
+      }
     }
 
   }
@@ -87,6 +67,7 @@ public class RegistrasiAntrean extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
+
     processRequest(request, response);
   }
 
